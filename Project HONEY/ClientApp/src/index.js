@@ -1,32 +1,26 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-// import { createStore, compose, applyMiddleware } from 'redux';
-// import { rootReducer } from './Redux/rootReducer';
-// import { Provider } from 'react-redux'
-// import thunk from 'redux-thunk'
-
+import configureStore, {history} from './store/storeConfig';
+import { ConnectedRouter } from 'connected-react-router';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
-
-
-// const store = createStore(
-//   rootReducer,
-//   compose(
-//       applyMiddleware(thunk),
-//       window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION()
-//   ))
+const initialState = window.initialReduxState;
+const store = configureStore(history, initialState);
 
 ReactDOM.render(
   <BrowserRouter basename={baseUrl}>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
+    <ConnectedRouter history={history}>
     <App />
-    {/* </Provider> */}
+    </ConnectedRouter>
+    </Provider>
   </BrowserRouter>,
   rootElement);
 

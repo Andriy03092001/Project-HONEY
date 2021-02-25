@@ -68,6 +68,7 @@ namespace Project_HONEY.Controllers
             {
                 var userProfile = new UserAdditionalInfo
                 {
+                    Id = user.Id,
                     Age = model.Age,
                     LastName = model.LastName,
                     Name = model.Name,

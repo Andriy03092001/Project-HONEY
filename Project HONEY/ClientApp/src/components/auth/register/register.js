@@ -5,10 +5,21 @@ class Register extends Component {
 
     state = {}
 
+
+ //визивається при зміні даних у пропсах
+ UNSAFE_componentWillReceiveProps = (nextProps) => {
+    console.log('Change props', nextProps);
+    this.setState({
+        loading: nextProps.loading,
+        errors: nextProps.errors } 
+    );
+}
+
     render() {
 
         const onFinish = (values) => {
             console.log('Success:', values);
+            this.props.registerUser(values);
         };
 
         const onFinishFailed = (errorInfo) => {

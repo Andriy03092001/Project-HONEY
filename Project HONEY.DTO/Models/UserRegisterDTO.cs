@@ -24,8 +24,6 @@ namespace Project_student.DTO.Models
         [CustomEmail(ErrorMessage = "Така електронна пошта вже зареєстрована")]
         public string Email { get; set; }
 
-        
-        
         [Required(ErrorMessage = "Введіть пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

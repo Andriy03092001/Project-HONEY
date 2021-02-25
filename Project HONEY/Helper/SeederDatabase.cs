@@ -54,7 +54,7 @@ namespace Project_STUDENTS_API___Angular.Helper
             _context.userAdditionalInfos.Add(
                 new UserAdditionalInfo
                 {
-                    Id = admin.Id,
+                   Id = admin.Id,
                    Age = 0,
                    RegisteredDate = DateTime.Now.ToShortDateString(),
                    Name = "Admin",

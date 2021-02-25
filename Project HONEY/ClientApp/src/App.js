@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Route } from 'react-router';
 import Login from './components/auth/login/login';
-import Register from './components/auth/register/register';
+import RegisterPage from './components/auth/register/index';
 import { Home } from './components/Home';
 import { NavMenu } from './components/NavMenu';
 
@@ -21,7 +21,7 @@ export default class App extends Component {
         <div className="container">
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
+          <Route exact path='/register' component={RegisterPage} />
         </div>
       </Fragment>
     );
