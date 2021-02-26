@@ -10,13 +10,13 @@ export const registerReducer = (state = intialState, action) => {
         case types.REGISTER_STARTED:
             return {
                 loading: true,
-                errors: {}
+                errors: ""
             }
 
         case types.REGISTER_SUCCESS:
             return {
                 loading: false,
-                errors: {}
+                errors: ""
             }
 
         case types.REGISTER_FAILED:

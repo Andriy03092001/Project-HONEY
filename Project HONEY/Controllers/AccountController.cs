@@ -37,15 +37,17 @@ namespace Project_HONEY.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ResultDto> Register([FromBody] UserRegisterDto model)
+        public async Task<IActionResult> Register([FromBody] UserRegisterDto model)
         {
             if (!ModelState.IsValid)
             {
-                return new ResultErrorDto
-                {
-                    Status = 400,
-                    Errors = CustomValidator.GetErrorsByModel(ModelState)
-                };
+            //    return new ResultErrorDto
+            //    {
+            //        Status = 400,
+            //        Errors = CustomValidator.GetErrorsByModel(ModelState)
+            //    };
+                return BadRequest("Wrong password or mail" );
+
             }
 
             var user = new User()
@@ -58,11 +60,13 @@ namespace Project_HONEY.Controllers
 
             if (!result.Succeeded)
             {
-                return new ResultErrorDto
-                {
-                    Status = 400,
-                    Errors = CustomValidator.GetErrorsByIdentityResult(result)
-                };
+                //return new ResultErrorDto
+                //{
+                //    Status = 400,
+                //    Errors = CustomValidator.GetErrorsByIdentityResult(result)
+                //};
+                return BadRequest(CustomValidator.GetErrorsByIdentityResult(result));
+
             }
             else
             {
@@ -77,29 +81,36 @@ namespace Project_HONEY.Controllers
                 _context.userAdditionalInfos.AddAsync(userProfile);
                 result = _userManager.AddToRoleAsync(user, "User").Result;
                 _context.SaveChanges();
-
-                var token = _jwtTokenService.CreateToken(user);
+                return Ok(
+                    new
+                    {
+                    token = _jwtTokenService.CreateToken(user)
+                });
             }
 
-            return new ResultDto
-            {
-                Status = 200
-            };
+         
+
+            //return new ResultDto
+            //{
+            //    Status = 200
+            //};
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<ResultDto> Login([FromBody] UserLoginDto model)
+        public async Task<IActionResult> Login([FromBody] UserLoginDto model)
         {
             if (!ModelState.IsValid)
             {
                 if (!ModelState.IsValid)
                 {
-                    return new ResultErrorDto
-                    {
-                        Status = 400,
-                        Errors = CustomValidator.GetErrorsByModel(ModelState)
-                    };
+                    return BadRequest(new { invalid = "Incorrect registration data" });
+
+                    //return new ResultErrorDto
+                    //{
+                    //    Status = 400,
+                    //    Errors = CustomValidator.GetErrorsByModel(ModelState)
+                    //};
                 }
             }
             var result = await _signInManager
@@ -108,22 +119,30 @@ namespace Project_HONEY.Controllers
 
             if (!result.Succeeded)
             {
-                List<string> temp = new List<string>();
-                temp.Add("Неправильна електронна пошта або пароль");
-                return new ResultErrorDto
-                {
-                    Status = 400,
-                    Errors = temp
-                };
+                return BadRequest(new { invalid = "Wrong password or mail" });
+
+                //List<string> temp = new List<string>();
+                //temp.Add("Неправильна електронна пошта або пароль");
+                //return new ResultErrorDto
+                //{
+                //    Status = 400,
+                //    Errors = temp
+                //};
             }
             var user = await _userManager.FindByEmailAsync(model.Email);
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new ResultLoginDto
-            {
-                Status = 200,
-                Token = _jwtTokenService.CreateToken(user)
-            };
+            return Ok(
+          new
+          {
+              token = _jwtTokenService.CreateToken(user)
+          });
+
+            //return new ResultLoginDto
+            //{
+            //    Status = 200,
+            //    Token = _jwtTokenService.CreateToken(user)
+            //};
         }
 
 

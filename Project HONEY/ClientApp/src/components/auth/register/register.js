@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, InputNumber } from 'antd';
+import { Form, Input, Button, InputNumber, Alert  } from 'antd';
 
 class Register extends Component {
 
-    state = {}
+    state = {
+        errorMessage: "",
+        loading: this.props.loading,
+        errors: this.props.errors,
+    }
 
 
- //визивається при зміні даних у пропсах
- UNSAFE_componentWillReceiveProps = (nextProps) => {
-    console.log('Change props', nextProps);
-    this.setState({
-        loading: nextProps.loading,
-        errors: nextProps.errors } 
-    );
-}
+    //визивається при зміні даних у пропсах
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
+        console.log('Change props', nextProps);
 
+        this.setState({
+            loading: nextProps.loading,
+            errorMessage: nextProps.errors
+        });
+
+        console.log(this.state.errors)
+    }
     render() {
-
         const onFinish = (values) => {
             console.log('Success:', values);
             this.props.registerUser(values);
@@ -25,11 +30,9 @@ class Register extends Component {
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
-
+        const {errorMessage} = this.state;
         return (
-
             <Form
-
                 name="basic"
                 initialValues={{
                     remember: true,
@@ -113,7 +116,7 @@ class Register extends Component {
                 </Form.Item>
 
 
-                
+
                 <label className="text-center">Confirm password:</label>
                 <Form.Item
                     name="confirm"
@@ -137,13 +140,14 @@ class Register extends Component {
                 >
                     <Input.Password />
                 </Form.Item>
-               
+
 
                 <Form.Item >
                     <Button type="primary" htmlType="submit">
                         Submit
           </Button>
                 </Form.Item>
+                {errorMessage ? ( <Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
             </Form>
 
         );

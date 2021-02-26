@@ -9,10 +9,10 @@ namespace Project_STUDENTS_API___Angular.Helper
 {
     public class CustomValidator
     {
-        public static List<string> GetErrorsByModel(
+        public string GetErrorsByModel(
             ModelStateDictionary modelErrors)
         {
-            var errors = new List<string>();
+            string errors = "";
 
             var errorList = modelErrors
                 .Where(x => x.Value.Errors.Count > 0)
@@ -25,19 +25,19 @@ namespace Project_STUDENTS_API___Angular.Helper
                 string key = item.Key;
                 //key=key.Replace(key[0], char.ToLower(key[0]));
                 key = char.ToLower(key[0]).ToString() + key.Substring(1);
-                errors.Add(item.Value);
+                errors += item.Value + " ";
             }
             return errors;
         }
 
-        public static List<string> GetErrorsByIdentityResult(
+        public static string GetErrorsByIdentityResult(
                                                     IdentityResult result)
         {
-            var listErrors = new List<string>();
+            string listErrors = "";
             var errors = result.Errors;
             foreach (var item in errors)
             {
-                listErrors.Add(item.Description);
+                listErrors += item.Description + " ";
             }
 
             return listErrors;
