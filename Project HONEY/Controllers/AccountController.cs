@@ -41,13 +41,7 @@ namespace Project_HONEY.Controllers
         {
             if (!ModelState.IsValid)
             {
-            //    return new ResultErrorDto
-            //    {
-            //        Status = 400,
-            //        Errors = CustomValidator.GetErrorsByModel(ModelState)
-            //    };
                 return BadRequest("Wrong password or mail" );
-
             }
 
             var user = new User()
@@ -60,13 +54,7 @@ namespace Project_HONEY.Controllers
 
             if (!result.Succeeded)
             {
-                //return new ResultErrorDto
-                //{
-                //    Status = 400,
-                //    Errors = CustomValidator.GetErrorsByIdentityResult(result)
-                //};
                 return BadRequest(CustomValidator.GetErrorsByIdentityResult(result));
-
             }
             else
             {
@@ -78,8 +66,8 @@ namespace Project_HONEY.Controllers
                     Name = model.Name,
                     RegisteredDate = DateTime.Now.ToShortDateString()
                 };
-                _context.userAdditionalInfos.AddAsync(userProfile);
-                result = _userManager.AddToRoleAsync(user, "User").Result;
+                await _context.userAdditionalInfos.AddAsync(userProfile);
+                await _userManager.AddToRoleAsync(user, "User");
                 _context.SaveChanges();
                 return Ok(
                     new
@@ -87,13 +75,6 @@ namespace Project_HONEY.Controllers
                     token = _jwtTokenService.CreateToken(user)
                 });
             }
-
-         
-
-            //return new ResultDto
-            //{
-            //    Status = 200
-            //};
         }
 
         [HttpPost]
@@ -104,13 +85,7 @@ namespace Project_HONEY.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(new { invalid = "Incorrect registration data" });
-
-                    //return new ResultErrorDto
-                    //{
-                    //    Status = 400,
-                    //    Errors = CustomValidator.GetErrorsByModel(ModelState)
-                    //};
+                    return BadRequest("Incorrect login data");
                 }
             }
             var result = await _signInManager
@@ -119,15 +94,7 @@ namespace Project_HONEY.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { invalid = "Wrong password or mail" });
-
-                //List<string> temp = new List<string>();
-                //temp.Add("Неправильна електронна пошта або пароль");
-                //return new ResultErrorDto
-                //{
-                //    Status = 400,
-                //    Errors = temp
-                //};
+                return BadRequest("Wrong password or mail" );
             }
             var user = await _userManager.FindByEmailAsync(model.Email);
             await _signInManager.SignInAsync(user, isPersistent: false);
@@ -137,16 +104,6 @@ namespace Project_HONEY.Controllers
           {
               token = _jwtTokenService.CreateToken(user)
           });
-
-            //return new ResultLoginDto
-            //{
-            //    Status = 200,
-            //    Token = _jwtTokenService.CreateToken(user)
-            //};
         }
-
-
-
-
     }
 }

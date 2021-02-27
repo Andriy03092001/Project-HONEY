@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, InputNumber, Alert  } from 'antd';
-
+import "../../../custom.css";
+import EclipseWidget from '../../eclipse';
 class Register extends Component {
 
     state = {
@@ -30,7 +31,7 @@ class Register extends Component {
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
-        const {errorMessage} = this.state;
+        const {errorMessage,loading} = this.state;
         return (
             <Form
                 name="basic"
@@ -148,6 +149,8 @@ class Register extends Component {
           </Button>
                 </Form.Item>
                 {errorMessage ? ( <Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
+                {loading && <EclipseWidget />}
+
             </Form>
 
         );

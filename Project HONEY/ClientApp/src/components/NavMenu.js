@@ -2,11 +2,24 @@ import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import { connect } from 'react-redux';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+class NavMenu extends Component {
 
-  constructor (props) {
+
+  state = {
+    isAuthenticated: false
+  }
+
+  //визивається при зміні даних у пропсах
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+    console.log('Change props', nextProps);
+    this.setState({
+      isAuthenticated: nextProps.isAuthenticated
+    });
+  }
+
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -15,13 +28,14 @@ export class NavMenu extends Component {
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     });
   }
 
-  render () {
+  render() {
+    const {isAuthenticated} = this.state;
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -39,6 +53,10 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
                 </NavItem>
+
+                {isAuthenticated & (<p>Log out</p>)}
+
+
               </ul>
             </Collapse>
           </Container>
@@ -47,3 +65,12 @@ export class NavMenu extends Component {
     );
   }
 }
+
+const mapState = (stateRedux) => {
+  return {
+    isAuthenticated: stateRedux.login.isAuthenticated
+  }
+}
+
+export default connect(mapState, null)(NavMenu)
+
