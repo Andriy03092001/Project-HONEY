@@ -8,7 +8,7 @@ class NavMenu extends Component {
 
 
   state = {
-    isAuthenticated: false
+    isAuthenticated: this.props.isAuthenticated
   }
 
   //визивається при зміні даних у пропсах
@@ -35,6 +35,8 @@ class NavMenu extends Component {
   }
 
   render() {
+    console.log("navbar props",this.props);
+
     const {isAuthenticated} = this.state;
     return (
       <header>
@@ -54,8 +56,7 @@ class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
                 </NavItem>
 
-                {isAuthenticated & (<p>Log out</p>)}
-
+                {isAuthenticated && (<p>Logout</p>)}
 
               </ul>
             </Collapse>

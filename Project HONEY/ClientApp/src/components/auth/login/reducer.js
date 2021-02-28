@@ -1,13 +1,17 @@
 import * as types from './types';
 import isEmpty from 'lodash/isEmpty';
 
+console.log(localStorage.getItem('authToken'));
+
 const intialState = {
+    token: !!localStorage.getItem('authToken'),
+     // or just !!localStorage.getItem('token')
     user: {
         id: '',
         name: '',
         roles: []
-      },
-      isAuthenticated: false,
+    },
+    isAuthenticated: localStorage.getItem('token') ? true : false,
     loading: false,
     errors: {
     }

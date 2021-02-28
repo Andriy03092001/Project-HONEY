@@ -25,7 +25,6 @@ export const loginUser = (model) => {
                 console.log("Global server error", err);
             }
         );
-
     }
 }
 
@@ -41,8 +40,6 @@ export const loginByJWT = (tokens, dispatch) => {
         type: types.LOGIN_SET_CURRENT_USER,
         user
     });
-    
-
 
     console.log("Login user ", user);
 }

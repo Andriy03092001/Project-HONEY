@@ -4,4 +4,5 @@ export default class LoginService {
     static loginUser(model) {
         return axios.post(`/api/Account/login`, model);
     }
+
 }
