@@ -1,0 +1,3 @@
+export const GETSTUDENT_STARTED = "student/GETSTUDENT_STARTED";
+export const GETSTUDENT_SUCCESS = "student/GETSTUDENT_SUCCESS";
+export const GETSTUDENT_FAILED = "student/GETSTUDENT_FAILED";
