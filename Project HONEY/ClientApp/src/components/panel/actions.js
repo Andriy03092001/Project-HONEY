@@ -1,6 +1,5 @@
 import * as types from './types';
 import PanelService from './service';
-import { push } from 'connected-react-router';
 
 export const getData = () => {
     return (dispatch) => {
@@ -9,7 +8,6 @@ export const getData = () => {
             .then((response) => {
                 console.log("Data server success:", response.data);
                 dispatch({ type: types.GETSTUDENT_SUCCESS, payload: response.data });
-                // dispatch(push('/'));
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({
