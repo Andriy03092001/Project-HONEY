@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Table, Input,Button } from 'antd';
+import { Table, Input, Button, Modal } from 'antd';
 import EclipseWidget from '../eclipse';
-
+import "./style.css";
 const { Search } = Input;
+
 
 
 class Panel extends Component {
@@ -11,8 +12,12 @@ class Panel extends Component {
         errors: this.props.errors,
         errorMessage: "",
         students: [],
-        filterStudents: []
+        currentPage: this.props.currentPage,
+        totalCount: this.props.totalCount,
+        sizePage: this.props.sizePage,
+        isEditModal: false
     }
+
 
     //визивається при зміні даних у пропсах
     UNSAFE_componentWillReceiveProps = (nextProps) => {
@@ -21,130 +26,120 @@ class Panel extends Component {
             loading: nextProps.loading,
             errorMessage: nextProps.errors,
             students: nextProps.students,
-            filterStudents: nextProps.students,
+            currentPage: nextProps.currentPage,
+            totalCount: nextProps.totalCount,
         }
         );
     }
 
     onSearch = value => {
-            if(value !== "") {
-                this.setState({
-                    filterStudents: this.state.students.filter(
-                        t => t.name.includes(value) 
-                        || t.email.includes(value) 
-                        || t.lastName.includes(value) 
-                        || t.age === value)
-                })
-            } else {
-                this.setState({
-                    filterStudents: this.state.students
-                })
-            }
-            
+        this.props.getData(this.state.currentPage, value)
     };
 
     componentDidMount() {
-        this.props.getData();
+        this.props.getData(this.state.currentPage);
     }
 
 
-    convertStringToDate(dateA) {
-        var temp = dateA.split(".");
-
-        var date = new Date(temp[2], temp[1] - 1, temp[0])
-
-        return date;
-
+    setPage = value => {
+        console.log("loh " + value)
+        // this.props.getData(page);
     }
+
+    handleOk = () => {
+        this.setState({
+            isEditModal: false
+        })
+        alert("Save changes...")
+    };
+
+    handleCancel = () => {
+        this.setState({
+            isEditModal: false
+        })
+    };
+
+    showModel = (id) => {
+        this.setState({
+            isEditModal: true
+        })
+        alert(id)
+    };
 
 
     render() {
-        //const { errorMessage, loading } = this.state;
-
         const columns = [
             {
                 title: 'Id',
-                dataIndex: 'id',
-                sorter: {
-                    compare: (a, b) => a.id.length - b.id.length,
-                },
+                dataIndex: 'id'
             },
             {
                 title: 'Name',
-                dataIndex: 'name',
-                sorter: {
-                    compare: (a, b) => a.name.length - b.name.length,
-                },
+                dataIndex: 'name'
             },
             {
                 title: 'Last Name',
-                dataIndex: 'lastName',
-                sorter: {
-                    compare: (a, b) => a.lastName.length - b.lastName.length,
-                },
+                dataIndex: 'lastName'
             },
             {
                 title: 'Age',
-                dataIndex: 'age',
-                sorter: {
-                    compare: (a, b) => a.age - b.age,
-                },
+                dataIndex: 'age'
             },
             {
                 title: 'Email',
-                dataIndex: 'email',
-                sorter: {
-                    compare: (a, b) => a.email.length - b.email.length,
-                },
+                dataIndex: 'email'
             },
             {
                 title: 'Registered Date',
-                dataIndex: 'registeredDate',
-                sorter: {
-                    compare: (a, b) => this.convertStringToDate(a.registeredDate) - this.convertStringToDate(b.registeredDate),
-                },
+                dataIndex: 'registeredDate'
             },
             {
                 title: 'Study Date',
-                dataIndex: 'studyDate',
-                sorter: {
-                    compare: (a, b) => a.studyDate.length - b.studyDate.length,
-                },
-                emptyText: "Did not choose the date of study"
+                dataIndex: 'studyDate'
             },
             {
                 title: 'Action',
-                dataIndex: '',
-                key: 'x',
-                render: (text, record) => (
-                  <Button danger
-                    // onClick={(e) => { this.onDelete(record.key, e); }}
-                  >
-                    Edit
-                  </Button>
+                dataIndex: 'id',
+                render: (id) => (
+                    <Button onClick={(e) => { this.showModel(id); }}  type="primary" danger>
+                        Edit
+                    </Button>
                 ),
-              }
+            }
 
         ];
+        const { loading, currentPage, totalCount } = this.state;
 
-        function onChange(pagination, filters, sorter, extra) {
-            console.log('params', pagination, filters, sorter, extra);
+        console.log(this.state.totalCount)
+        const pages = [];
+        for (let i = 1; i <= Math.ceil(this.state.totalCount / this.state.sizePage); i++) {
+            pages.push(i);
         }
-
-        const {  loading } = this.state;
-
         return (
             <Fragment>
-                <Search placeholder="Search..." onSearch={this.onSearch} enterButton />
-                <Table columns={columns} dataSource={this.state.filterStudents} onChange={onChange} />
+                <div className="main-panel">
+                    <Search placeholder="Search..." onSearch={this.onSearch} enterButton ></Search>
+                    <Table columns={columns} dataSource={this.state.students} pagination={false} ></Table>
+                </div>
+                {totalCount>0 && <div className="pagination text-center">
+                    {pages.map((page, index) =>
+                        <span className={currentPage === page ? "active" : "page"}
+                            key={index}
+                            onClick={() => this.props.getData(page)}>
+                            {page}
+                        </span>)}
+                </div>}
+
+                <Modal title="Basic Modal" visible={this.state.isEditModal} onOk={this.handleOk} onCancel={this.handleCancel}>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                </Modal>
+
                 {loading && <EclipseWidget />}
 
             </Fragment>
         );
-
-
-
-
     }
 }
 

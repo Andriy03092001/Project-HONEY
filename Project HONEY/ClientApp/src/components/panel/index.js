@@ -6,7 +6,10 @@ const mapState = (stateRedux) => {
     return {
         loading: stateRedux.panel.loading,
         errors: stateRedux.panel.errors,
-        students: stateRedux.panel.students
+        students: stateRedux.panel.students,
+        currentPage: stateRedux.panel.currentPage,
+        totalCount: stateRedux.panel.totalCount,
+        sizePage: stateRedux.panel.sizePage,
     }
 }
 

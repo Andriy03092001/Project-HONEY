@@ -1,7 +1,10 @@
 import * as types from './types';
 
 const intialState = {
-    students: []
+    students: [],
+    totalCount: 0,
+    currentPage: 1,
+    sizePage: 15
 }
 
 export const panelReducer = (state = intialState, action) => {
@@ -19,7 +22,9 @@ export const panelReducer = (state = intialState, action) => {
                 ...state,
                 loading: false,
                 errors: "",
-                students: action.payload
+                students: action.payload.students,
+                totalCount: action.payload.totalCount,
+                sizePage: action.payload.sizePage
             }
 
         case types.GETSTUDENT_FAILED:
@@ -27,6 +32,13 @@ export const panelReducer = (state = intialState, action) => {
                 ...state,
                 loading: false,
                 errors: action.errors
+            }
+
+        case types.SET_CURRENT_PAGE:
+            return {
+                ...state,
+                loading: true,
+                currentPage: action.payload
             }
 
 

@@ -17,23 +17,25 @@ namespace Project_HONEY.Controllers
     public class AdminPanelController : ControllerBase
     {
 
-        private EFContext _context;
-        private UserManager<User> _userManager;
-        public AdminPanelController(EFContext context, UserManager<User> userManager)
+        private EFContext _Context;
+        public AdminPanelController(EFContext Context)
         {
-            _context = context;
-            _userManager = userManager;
+            _Context = Context;
         }
 
         [Route("getStudents")]
         //[Authorize(Roles = "Admin")]
-        public List<StudentDTO> getStudents()
+        public ListStudentDTO GetStudents(int page = 1, string q = "", int pageSize = 15)
         {
-            var roleId = _context.Roles.FirstOrDefault(t => t.Name == "User").Id;
-            List<string> userIds = _context.UserRoles.Where(a => a.RoleId == roleId).Select(b => b.UserId).Distinct().ToList();
-            List<StudentDTO> listUsers = _context.Users
+            var roleId = _Context.Roles.FirstOrDefault(t => t.Name == "User").Id;
+            List<string> userIds = _Context.UserRoles.Where(a => a.RoleId == roleId).Select(b => b.UserId).Distinct().ToList();
+            List<StudentDTO> listUsers = _Context.Users
                 .Include(t => t.UserAdditionalInfo)
                 .Where(a => userIds.Any(c => c == a.Id))
+                .Where(
+                    u => u.Email.Contains(q) ||
+                    u.UserAdditionalInfo.LastName.Contains(q) ||
+                    u.UserAdditionalInfo.Name.Contains(q))
                 .Select(t => new StudentDTO()
                 {
                     Id = t.Id,
@@ -45,8 +47,20 @@ namespace Project_HONEY.Controllers
                     StudyDate = t.UserAdditionalInfo.StudyDate
                 }).ToList();
 
-            return listUsers;
+            
+            var count = listUsers.Count();
+            var items = listUsers.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ListStudentDTO dto = new ListStudentDTO()
+            {
+                Students = items,
+                totalCount = count,
+                sizePage = pageSize
+            };
+
+            return dto;
         }
+
 
 
 

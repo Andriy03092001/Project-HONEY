@@ -21,7 +21,6 @@ export default class App extends Component {
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/panel' component={PanelPage} />
-
         </div>
       </Fragment>
     );

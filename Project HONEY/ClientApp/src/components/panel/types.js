@@ -1,3 +1,5 @@
 export const GETSTUDENT_STARTED = "student/GETSTUDENT_STARTED";
 export const GETSTUDENT_SUCCESS = "student/GETSTUDENT_SUCCESS";
 export const GETSTUDENT_FAILED = "student/GETSTUDENT_FAILED";
+export const SET_CURRENT_PAGE = "student/SET_CURRENT_PAGE";
+
