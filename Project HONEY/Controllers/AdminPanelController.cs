@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Project_HONEY.Domain.Implementation;
 using Project_HONEY.DTO.Models;
+using Project_HONEY.Helper;
 using Project_STUDENTS.DataAccess.Entity;
 using System;
 using System.Collections.Generic;
@@ -18,52 +20,38 @@ namespace Project_HONEY.Controllers
     {
 
         private EFContext _Context;
-        public AdminPanelController(EFContext Context)
+        private UserManager<User> _UserManeger;
+        public QueriesService _QueriesService;
+        public CommandService _CommandService;
+
+        public AdminPanelController(EFContext Context, UserManager<User> UserManeger)
         {
+            _UserManeger = UserManeger;
             _Context = Context;
+            _QueriesService = new QueriesService(_Context, _UserManeger);
+            _CommandService = new CommandService(_Context, _UserManeger); 
         }
 
-        [Route("getStudents")]
+        [HttpGet("students")]
         //[Authorize(Roles = "Admin")]
-        public ListStudentDTO GetStudents(int page = 1, string q = "", int pageSize = 15)
+        public ListStudentDTO GetStudents(int page = 1, string searchText = "", int pageSize = 15)
         {
-            var roleId = _Context.Roles.FirstOrDefault(t => t.Name == "User").Id;
-            List<string> userIds = _Context.UserRoles.Where(a => a.RoleId == roleId).Select(b => b.UserId).Distinct().ToList();
-            List<StudentDTO> listUsers = _Context.Users
-                .Include(t => t.UserAdditionalInfo)
-                .Where(a => userIds.Any(c => c == a.Id))
-                .Where(
-                    u => u.Email.Contains(q) ||
-                    u.UserAdditionalInfo.LastName.Contains(q) ||
-                    u.UserAdditionalInfo.Name.Contains(q))
-                .Select(t => new StudentDTO()
-                {
-                    Id = t.Id,
-                    Name = t.UserAdditionalInfo.Name,
-                    Age = t.UserAdditionalInfo.Age,
-                    Email = t.Email,
-                    LastName = t.UserAdditionalInfo.LastName,
-                    RegisteredDate = t.UserAdditionalInfo.RegisteredDate,
-                    StudyDate = t.UserAdditionalInfo.StudyDate
-                }).ToList();
-
-            
-            var count = listUsers.Count();
-            var items = listUsers.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            ListStudentDTO dto = new ListStudentDTO()
-            {
-                Students = items,
-                totalCount = count,
-                sizePage = pageSize
-            };
-
-            return dto;
+            return _QueriesService.getStudents(page, searchText, pageSize);
         }
 
-
-
-
-
+        [HttpPut("editStudent")]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult EditStudent(EditStudentDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Please, enter all field correct");
+            }
+            else
+            {
+                _CommandService.EditStudent(dto);
+                return Ok("The student has successfully edited");
+            }
+        }
     }
 }

@@ -26,7 +26,6 @@ export const loginReducer = (state = intialState, action) => {
                 loading: true,
                 errors: ""
             }
-            break;
             
         case types.LOGIN_SUCCESS:
             return {
@@ -34,7 +33,6 @@ export const loginReducer = (state = intialState, action) => {
                 loading: false,
                 errors: ""
             }
-            break;
 
         case types.LOGIN_FAILED:
                 return {
@@ -42,7 +40,6 @@ export const loginReducer = (state = intialState, action) => {
                     loading: false,
                     errors: action.errors
                 }
-            break;
     
         case types.LOGIN_SET_CURRENT_USER:{
                 return {
@@ -50,7 +47,6 @@ export const loginReducer = (state = intialState, action) => {
                     user: action.user,
                     isAuthenticated: !isEmpty(action.user),
                 };
-                break;
             }
         default:
             break;

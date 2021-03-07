@@ -37,32 +37,51 @@ namespace Project_STUDENTS_API___Angular.Helper
                 {
                     Name = "User"
                 }).Result;
-              
+                
+                string email = "admin@gmail.com";
+                var admin = new User
+                {
+                    Email = email,
+                    UserName = email,
+                    Age = 0,
+                    RegisteredDate = DateTime.Now.ToShortDateString(),
+                    Name = "Admin",
+                    LastName = "Admin"
+                };
+
+                var resultAdmin = userManager.CreateAsync(admin, "Qwerty1-").Result;
+                resultAdmin = userManager.AddToRoleAsync(admin, "Admin").Result;
             }
 
-            string email = "admin@gmail.com";
-            var admin = new User
+            _context.Course.Add(new Project_HONEY.DataAccess.Entity.Course { 
+            Title = "Angular",
+            Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png"
+            });
+
+            _context.Course.Add(new Project_HONEY.DataAccess.Entity.Course
             {
-                Email = email,
-                UserName = email
-            };
-          
-            var resultAdmin = userManager.CreateAsync(admin, "Qwerty1-").Result;
-            resultAdmin = userManager.AddToRoleAsync(admin, "Admin").Result;
+                Title = "Java Script",
+                Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png"
+            });
 
 
-            _context.userAdditionalInfos.Add(
-                new UserAdditionalInfo
-                {
-                   Id = admin.Id,
-                   Age = 0,
-                   RegisteredDate = DateTime.Now.ToShortDateString(),
-                   Name = "Admin",
-                   LastName = "Admin"
-                });
+            _context.Course.Add(new Project_HONEY.DataAccess.Entity.Course
+            {
+                Title = "React",
+                Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+            });
 
 
-         
+            _context.Course.Add(new Project_HONEY.DataAccess.Entity.Course
+            {
+                Title = "HTML\\CSS",
+                Image = "https://knewit.kz/wp-content/uploads/2020/12/1lJ32Bl-lHWmNMUSiSq17gQ.png"
+            });
+
+            _context.SaveChanges();
+
+
+
             _context.SaveChanges();
 
 

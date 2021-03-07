@@ -5,6 +5,7 @@ import RegisterPage from './components/auth/register/index';
 import { Home } from './components/Home';
 import NavMenu from './components/NavMenu';
 import PanelPage from './components/panel/index';
+import PanelCoursesPage from './components/panelCourses/index'
 import './custom.css'
 
 
@@ -21,6 +22,8 @@ export default class App extends Component {
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/panel' component={PanelPage} />
+          <Route exact path='/panelCourses' component={PanelCoursesPage} />
+
         </div>
       </Fragment>
     );

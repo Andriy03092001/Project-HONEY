@@ -27,3 +27,27 @@ export const getData = (page = 1, q = "") => {
             );
     }
 }
+
+
+export const editStudent = (model) => {
+    return (dispatch) => {
+        dispatch({ type: types.EDITSTUDENT_STARTED });
+
+        PanelService.editStudents(model)
+            .then((response) => {
+                console.log("Data server success:", response.data);
+                dispatch({ type: types.EDITSTUDENT_SUCCESS, payload: response.data });
+                getData();
+            }, err => {
+                console.log("error: ", err.response);
+                dispatch({
+                    type: types.EDITSTUDENT_FAILED,
+                    errors: err.response.data
+                });
+            })
+            .catch(err => {
+                console.log("Global server error", err);
+            }
+            );
+    }
+}

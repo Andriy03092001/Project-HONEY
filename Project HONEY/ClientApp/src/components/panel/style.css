@@ -11,8 +11,12 @@
   }
   
   .pagination span.active {
-    background-color: #2469aa;
+    background-color: #1890ff;
     color: white;
   }
   
   .pagination span:hover:not(.active) {background-color: #ddd;}
+  
+  label {
+    font-weight: bold;
+  }

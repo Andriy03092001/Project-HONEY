@@ -22,3 +22,5 @@ C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\P
 C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.csproj.CopyComplete
 C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.dll
 C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.pdb
+C:\Users\Admin\Desktop\Project HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.dll
+C:\Users\Admin\Desktop\Project HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.pdb

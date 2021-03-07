@@ -1,6 +1,6 @@
 import Panel from './panel';
 import { connect } from 'react-redux';
-import { getData } from './actions';
+import { getData, editStudent } from './actions';
 
 const mapState = (stateRedux) => {
     return {
@@ -14,4 +14,4 @@ const mapState = (stateRedux) => {
 }
 
 const PanelPage = Panel;
-export default connect(mapState, { getData })(PanelPage)
+export default connect(mapState, { getData, editStudent })(PanelPage)

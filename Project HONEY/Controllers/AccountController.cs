@@ -41,13 +41,17 @@ namespace Project_HONEY.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Wrong password or mail" );
+                return BadRequest("Wrong password or mail");
             }
 
             var user = new User()
             {
                 UserName = model.Email,
                 Email = model.Email,
+                Age = model.Age,
+                LastName = model.LastName,
+                Name = model.Name,
+                RegisteredDate = DateTime.Now.ToShortDateString()
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
@@ -56,25 +60,16 @@ namespace Project_HONEY.Controllers
             {
                 return BadRequest(CustomValidator.GetErrorsByIdentityResult(result));
             }
-            else
-            {
-                var userProfile = new UserAdditionalInfo
+
+
+
+            await _userManager.AddToRoleAsync(user, "User");
+            _context.SaveChanges();
+            return Ok(
+                new
                 {
-                    Id = user.Id,
-                    Age = model.Age,
-                    LastName = model.LastName,
-                    Name = model.Name,
-                    RegisteredDate = DateTime.Now.ToShortDateString()
-                };
-                await _context.userAdditionalInfos.AddAsync(userProfile);
-                await _userManager.AddToRoleAsync(user, "User");
-                _context.SaveChanges();
-                return Ok(
-                    new
-                    {
                     token = _jwtTokenService.CreateToken(user)
                 });
-            }
         }
 
         [HttpPost]
@@ -94,7 +89,7 @@ namespace Project_HONEY.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest("Wrong password or mail" );
+                return BadRequest("Wrong password or mail");
             }
             var user = await _userManager.FindByEmailAsync(model.Email);
             await _signInManager.SignInAsync(user, isPersistent: false);

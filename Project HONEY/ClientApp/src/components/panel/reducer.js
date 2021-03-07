@@ -42,6 +42,28 @@ export const panelReducer = (state = intialState, action) => {
             }
 
 
+            case types.EDITSTUDENT_STARTED:
+                return {
+                    ...state,
+                    loading: true,
+                    errors: ""
+                }
+    
+            case types.EDITSTUDENT_SUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    errors: "",
+                }
+    
+            case types.EDITSTUDENT_FAILED:
+                return {
+                    ...state,
+                    loading: false,
+                    errors: action.errors
+                }
+
+
         default:
             break;
     }

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Project_HONEY.Domain.Implementation;
+using Project_HONEY.Domain.Interfaces;
 using Project_IDA.Domain;
 using Project_IDA.Domain.Interfaces;
 using Project_STUDENTS.DataAccess.Entity;
@@ -43,6 +45,8 @@ namespace Project_HONEY
            .AddDefaultTokenProviders();
 
             services.AddTransient<IJWTTokenService, JWTTokenService>();
+            services.AddTransient<IQueriesService, QueriesService>();
+
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecretPhrase")));
 

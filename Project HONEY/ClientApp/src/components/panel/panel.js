@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Table, Input, Button, Modal } from 'antd';
+import { Table, Input, Button, Modal, Form, InputNumber } from 'antd';
 import EclipseWidget from '../eclipse';
 import "./style.css";
 const { Search } = Input;
@@ -15,7 +15,8 @@ class Panel extends Component {
         currentPage: this.props.currentPage,
         totalCount: this.props.totalCount,
         sizePage: this.props.sizePage,
-        isEditModal: false
+        isEditModal: false,
+        editStudent: {}
     }
 
 
@@ -40,68 +41,106 @@ class Panel extends Component {
         this.props.getData(this.state.currentPage);
     }
 
-
-    setPage = value => {
-        console.log("loh " + value)
-        // this.props.getData(page);
-    }
-
-    handleOk = () => {
-        this.setState({
-            isEditModal: false
-        })
-        alert("Save changes...")
-    };
-
     handleCancel = () => {
         this.setState({
             isEditModal: false
         })
     };
 
+
     showModel = (id) => {
+        var student = this.state.students.find(x => x.id === id);
+        console.log(student)
         this.setState({
-            isEditModal: true
+            isEditModal: true,
+            editStudent: student
         })
-        alert(id)
     };
 
-
     render() {
+        const layout = {
+            labelCol: {
+                span: 8,
+            },
+            wrapperCol: {
+                span: 16,
+            },
+        };
+        const tailLayout = {
+            wrapperCol: {
+                offset: 8,
+                span: 16,
+            },
+        };
+
+
+        const onFinish = (values) => {
+            const editedStudent = {
+                id: this.state.editStudent.id,
+                name: (values.name ? values.name : this.state.editStudent.name),
+                lastName: (values.lastName ? values.lastName : this.state.editStudent.lastName),
+                email: (values.email ? values.email : this.state.editStudent.email),
+                age: (values.age ? values.age : this.state.editStudent.age)
+            }
+            this.props.editStudent(editedStudent);
+            this.setState({
+                isEditModal: false
+            })
+            this.props.getData(this.state.currentPage);
+        };
+
+        const onFinishFailed = (errorInfo) => {
+            console.log('Failed:', errorInfo);
+        };
+
         const columns = [
             {
                 title: 'Id',
-                dataIndex: 'id'
+                dataIndex: 'id',
             },
             {
                 title: 'Name',
-                dataIndex: 'name'
+                dataIndex: 'name',
+                sorter: {
+                    compare: (a, b) => a.body.length - b.body.length,
+                },
             },
             {
                 title: 'Last Name',
-                dataIndex: 'lastName'
+                dataIndex: 'lastName',
+                sorter: {
+                    compare: (a, b) => a.lastName.length - b.lastName.length,
+                },
             },
             {
                 title: 'Age',
-                dataIndex: 'age'
+                dataIndex: 'age',
+                sorter: {
+                    compare: (a, b) => a.age - b.age,
+                },
             },
             {
                 title: 'Email',
-                dataIndex: 'email'
+                dataIndex: 'email',
+                sorter: {
+                    compare: (a, b) => a.email.length - b.email.length,
+                },
             },
             {
                 title: 'Registered Date',
-                dataIndex: 'registeredDate'
+                dataIndex: 'registeredDate',
+
             },
             {
                 title: 'Study Date',
-                dataIndex: 'studyDate'
+                dataIndex: 'studyDate',
+                emptyText: "Did not choose the date of study"
             },
             {
                 title: 'Action',
                 dataIndex: 'id',
                 render: (id) => (
-                    <Button onClick={(e) => { this.showModel(id); }}  type="primary" danger>
+                    <Button onClick={(e) => { this.showModel(id); }} type="primary" danger>
                         Edit
                     </Button>
                 ),
@@ -110,18 +149,18 @@ class Panel extends Component {
         ];
         const { loading, currentPage, totalCount } = this.state;
 
-        console.log(this.state.totalCount)
         const pages = [];
         for (let i = 1; i <= Math.ceil(this.state.totalCount / this.state.sizePage); i++) {
             pages.push(i);
         }
         return (
             <Fragment>
+                <h2>Students manager:</h2>
                 <div className="main-panel">
                     <Search placeholder="Search..." onSearch={this.onSearch} enterButton ></Search>
                     <Table columns={columns} dataSource={this.state.students} pagination={false} ></Table>
                 </div>
-                {totalCount>0 && <div className="pagination text-center">
+                {totalCount > 0 && <div className="pagination text-center">
                     {pages.map((page, index) =>
                         <span className={currentPage === page ? "active" : "page"}
                             key={index}
@@ -130,14 +169,36 @@ class Panel extends Component {
                         </span>)}
                 </div>}
 
-                <Modal title="Basic Modal" visible={this.state.isEditModal} onOk={this.handleOk} onCancel={this.handleCancel}>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                <Modal title="Edit student" visible={this.state.isEditModal} onCancel={this.handleCancel}>
+                    <Form {...layout} name="basic" initialValues={{
+                            remember: true,
+                        }} onFinish={onFinish} onFinishFailed={onFinishFailed} >
+
+                        <Form.Item label="Email" name="email" >
+                            <Input placeholder={this.state.editStudent.email} />
+                        </Form.Item>
+
+
+                        <Form.Item label="Name" name="name" >
+                            <Input placeholder={this.state.editStudent.name} />
+                        </Form.Item>
+
+                        <Form.Item label="Last Name" name="lastName" >
+                            <Input placeholder={this.state.editStudent.lastName} />
+                        </Form.Item>
+
+                        <Form.Item label="Age" name="age" >
+                            <InputNumber placeholder={this.state.editStudent.age} />
+                        </Form.Item>
+
+
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit">Submit</Button>
+                        </Form.Item>
+                    </Form>
+
                 </Modal>
-
                 {loading && <EclipseWidget />}
-
             </Fragment>
         );
     }

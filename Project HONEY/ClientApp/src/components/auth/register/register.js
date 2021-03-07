@@ -22,6 +22,9 @@ class Register extends Component {
 
         console.log(this.state.errors)
     }
+
+
+    
     render() {
         const onFinish = (values) => {
             console.log('Success:', values);
