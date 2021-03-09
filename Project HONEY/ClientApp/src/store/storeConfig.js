@@ -6,7 +6,7 @@ import { registerReducer } from '../components/auth/register/reducer';
 import { loginReducer } from '../components/auth/login/reducer';
 import { panelReducer } from '../components/panel/reducer';
 import { panelCoursesReducer } from '../components/panelCourses/reducer';
-
+import { panelStudentReducer } from '../components/student/reducer';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
@@ -16,7 +16,8 @@ export default function configureStore(history, initialState) {
     register: registerReducer,
     login: loginReducer,
     panel: panelReducer,
-    panelCourses: panelCoursesReducer
+    panelCourses: panelCoursesReducer,
+    panelStudent: panelStudentReducer
   };
 
   const middleware = [

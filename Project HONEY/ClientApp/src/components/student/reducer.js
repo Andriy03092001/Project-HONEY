@@ -7,7 +7,7 @@ const intialState = {
     sizePage: 8
 }
 
-export const panelCoursesReducer = (state = intialState, action) => {
+export const panelStudentReducer = (state = intialState, action) => {
     switch (action.type) {
         case types.GETCOURSES_STARTED:
             return {
@@ -41,26 +41,26 @@ export const panelCoursesReducer = (state = intialState, action) => {
             }
 
 
-            case types.ADDCOURSES_STARTED:
-                return {
-                    ...state,
-                    loading: true,
-                    errors: ""
-                }
+            // case types.ADDCOURSES_STARTED:
+            //     return {
+            //         ...state,
+            //         loading: true,
+            //         errors: ""
+            //     }
     
-            case types.ADDCOURSES_SUCCESS:
-                return {
-                    ...state,
-                    loading: false,
-                    errors: "",
-                }
+            // case types.ADDCOURSES_SUCCESS:
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         errors: "",
+            //     }
     
-            case types.ADDCOURSES_FAILED:
-                return {
-                    ...state,
-                    loading: false,
-                    errors: action.errors
-                }
+            // case types.ADDCOURSES_FAILED:
+            //     return {
+            //         ...state,
+            //         loading: false,
+            //         errors: action.errors
+            //     }
 
 
 

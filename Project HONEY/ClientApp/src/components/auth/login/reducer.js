@@ -4,14 +4,9 @@ import isEmpty from 'lodash/isEmpty';
 console.log(localStorage.getItem('authToken'));
 
 const intialState = {
-    token: !!localStorage.getItem('authToken'),
-     // or just !!localStorage.getItem('token')
-    user: {
-        id: '',
-        name: '',
-        roles: []
-    },
-    isAuthenticated: localStorage.getItem('token') ? true : false,
+    token: localStorage.getItem('authToken'),
+    // or just !!localStorage.getItem('token')
+    isAuthenticated: localStorage.getItem('authToken') ? true : false,
     loading: false,
     errors: {
     }

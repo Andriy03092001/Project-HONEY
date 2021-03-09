@@ -1,0 +1,36 @@
+.pagination {
+    display: inline-block;
+  }
+  
+  .pagination span {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .pagination span.active {
+    background-color: #1890ff;
+    color: white;
+  }
+  
+  .pagination span:hover:not(.active) {background-color: #ddd;}
+  
+  label {
+    font-weight: bold;
+  }
+
+  .fl {
+    float: left;
+  }
+
+
+  .btnSub {
+    margin-top:15px;
+    background-color: #1890ff;
+  }
+
+  .btnSub:hover {
+    background-color: #2492f8;
+  }

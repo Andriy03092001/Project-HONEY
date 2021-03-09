@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import { Card, Col, Row, Button, Input,Modal, Form } from 'antd';
+import { Card, Col, Row, Button, Input, Modal, Form, DatePicker } from 'antd';
 import "./style.css";
 import EclipseWidget from '../eclipse';
+
 
 const { Meta } = Card;
 const { Search } = Input;
 
 
-class PanelCourses extends Component {
+class PanelStudent extends Component {
     state = {
         loading: this.props.loading,
         errors: this.props.errors,
@@ -16,7 +17,8 @@ class PanelCourses extends Component {
         currentPage: this.props.currentPage,
         totalCount: this.props.totalCount,
         sizePage: this.props.sizePage,
-        isModal: false
+        isModal: false,
+        selectCourseId: ""
     }
 
     UNSAFE_componentWillReceiveProps = (nextProps) => {
@@ -28,11 +30,10 @@ class PanelCourses extends Component {
             totalCount: nextProps.totalCount,
         }
         );
-        console.log('Courses from state: ', nextProps.courses);
     }
 
     componentDidMount() {
-        this.props.getData();
+        this.props.getCourse();
     }
 
     handleCancel = () => {
@@ -50,8 +51,17 @@ class PanelCourses extends Component {
 
 
     onSearch = value => {
-        this.props.getData(this.state.currentPage, value)
+        this.props.getCourse(this.state.currentPage, value)
     };
+
+
+    subCourse = (e) => {
+        const id = e.target.value;
+        this.setState({
+            selectCourseId: id
+        })
+        this.showModel();
+    }
 
     render() {
 
@@ -72,22 +82,30 @@ class PanelCourses extends Component {
 
 
         const onFinish = (values) => {
-            const newCourse = {
-                title: values.title,
-                image: values.image
-              
+            const sub = {
+                idCourse: this.state.selectCourseId,
+                date: values.date._d
             }
-            this.props.addCourse(newCourse);
-            this.handleCancel();
-            this.props.getData(this.state.currentPage);
+            console.log(sub)
+            // const newCourse = {
+            //     title: values.title,
+            //     image: values.image
+
+            // }
+            // this.props.addCourse(newCourse);
+             this.handleCancel();
+            // this.props.getData(this.state.currentPage);
         };
 
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
 
+        
 
         const { loading, currentPage, totalCount } = this.state;
+        const dateFormat = 'DD/MM/YYYY';
+
 
         const pages = [];
         for (let i = 1; i <= Math.ceil(this.state.totalCount / this.state.sizePage); i++) {
@@ -95,26 +113,24 @@ class PanelCourses extends Component {
         }
         return (
             <Fragment>
-                <h2>Course manager:</h2>
-                <div className="row">
-                    <Search className="col-10" placeholder="Search..." onSearch={this.onSearch} enterButton  ></Search>
-                    <Button className="col-2" type="primary"  onClick={() => this.showModel()}>Add new course</Button>
-                </div>
+                <h2>Choose course:</h2>
+                <Search placeholder="Search..." onSearch={this.onSearch} enterButton  ></Search>
 
                 <div className="site-card-wrapper">
                     <Row gutter={16}>
-
                         {this.state.courses.map((course, index) =>
-                            <Col span={6}>
+                            <Col span={6} key={index}>
                                 <Card
                                     hoverable
                                     style={{ width: 240, marginTop: 10, height: 300 }}
                                     cover={<img height="200px" alt="example" src={course.image} />}
                                 >
-                                    <Meta title={course.title} />
+                                    <div className="row" value={course.id}>
+                                        <Meta className="col-12" title={course.title} value={course.id} />
+                                        <button className="btn btn-info col-12 btnSub" type="primary" value={course.id} onClick={this.subCourse} htmlType="submit">Subscribe</button>
+                                    </div>
                                 </Card>
                             </Col>
-
                         )}
                     </Row>
                 </div>
@@ -123,40 +139,32 @@ class PanelCourses extends Component {
                     {pages.map((page, index) =>
                         <span className={currentPage === page ? "active" : "page"}
                             key={index}
-                            onClick={() => this.props.getData(page)}>
+                            onClick={() => this.props.getCourse(page)}>
                             {page}
                         </span>)}
                 </div>}
                 {loading && <EclipseWidget />}
 
 
-                <Modal title="Add new course" visible={this.state.isModal} onCancel={this.handleCancel}>
+                <Modal title="Subscribe on course" visible={this.state.isModal} cancelButtonProps={{ style: { display: 'none' } }}>
                     <Form {...layout} name="basic" initialValues={{
-                            remember: true,
-                        }} onFinish={onFinish} onFinishFailed={onFinishFailed} >
+                        remember: true,
+                    }} onFinish={onFinish} onFinishFailed={onFinishFailed} >
 
-                        <Form.Item label="Course title:" name="title" 
-                         rules={[
-                            {
-                              required: true,
-                              message: 'Please input title!',
-                            },
-                          ]}
+                        <Form.Item label="Choose date:" name="date"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please choose date!',
+                                },
+                            ]}
                         >
-                            <Input />
+                              <DatePicker format={dateFormat}/>
+
                         </Form.Item>
 
 
-                        <Form.Item label="Image URL:" name="image" 
-                         rules={[
-                            {
-                              required: true,
-                              message: 'Please input image URL!',
-                            },
-                          ]}
-                        >
-                            <Input/>
-                        </Form.Item>
+                     
 
 
                         <Form.Item {...tailLayout}>
@@ -172,4 +180,4 @@ class PanelCourses extends Component {
 }
 
 
-export default PanelCourses
+export default PanelStudent

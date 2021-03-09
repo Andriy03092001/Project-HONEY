@@ -27,7 +27,7 @@ namespace Project_HONEY.Domain.Implementation
                 Id = t.Id,
                 Image = t.Image,
                 Title = t.Title
-            }).ToList();
+            }).ToList().Where(t => t.Title.Contains(searchText));
 
             var count = listCourses.Count();
             var items = listCourses.Skip((page - 1) * pageSize).Take(pageSize).ToList();

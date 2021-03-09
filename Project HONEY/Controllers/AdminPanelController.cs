@@ -53,5 +53,21 @@ namespace Project_HONEY.Controllers
                 return Ok("The student has successfully edited");
             }
         }
+
+
+        [HttpPost("addCourse")]
+        public IActionResult AddCourse(CreateCourseDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Please, enter all field correct");
+            }
+            else
+            {
+                _CommandService.AddCourse(dto);
+                return Ok("The course has successfully added");
+            }
+        }
+
     }
 }
