@@ -21,7 +21,7 @@ class Panel extends Component {
 
 
     //визивається при зміні даних у пропсах
-    UNSAFE_componentWillReceiveProps = (nextProps) => {
+    UNSAFE_componentWillReceiveProps  = (nextProps) => {
         console.log('Students: ', nextProps);
         this.setState({
             loading: nextProps.loading,

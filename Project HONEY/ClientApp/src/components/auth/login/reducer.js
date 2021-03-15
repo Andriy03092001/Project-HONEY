@@ -5,7 +5,6 @@ console.log(localStorage.getItem('authToken'));
 
 const intialState = {
     token: localStorage.getItem('authToken'),
-    // or just !!localStorage.getItem('token')
     isAuthenticated: localStorage.getItem('authToken') ? true : false,
     loading: false,
     errors: {
@@ -15,32 +14,40 @@ const intialState = {
 export const loginReducer = (state = intialState, action) => {
     console.log("Reducer working", action);
     switch (action.type) {
-        case types.LOGIN_STARTED:
+        case types.LOGINSTARTED:
             return {
                 ...state,
                 loading: true,
                 errors: ""
             }
             
-        case types.LOGIN_SUCCESS:
+        case types.LOGINSUCCESS:
             return {
                 ...state,
                 loading: false,
                 errors: ""
             }
 
-        case types.LOGIN_FAILED:
+        case types.LOGINFAILED:
                 return {
                     ...state,
                     loading: false,
                     errors: action.errors
                 }
     
-        case types.LOGIN_SET_CURRENT_USER:{
+        case types.LOGINSETCURRENTUSER:{
                 return {
                     ...state, 
                     user: action.user,
                     isAuthenticated: !isEmpty(action.user),
+                };
+            }
+
+            case types.LOGOUT:{
+                return {
+                    ...state, 
+                    user: null,
+                    isAuthenticated: false,
                 };
             }
         default:

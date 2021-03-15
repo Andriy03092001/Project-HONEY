@@ -34,13 +34,13 @@ namespace Project_STUDENTS_API___Angular.Helper
                                                     IdentityResult result)
         {
             string listErrors = "";
-            var errors = result.Errors;
-            foreach (var item in errors)
-            {
-                listErrors += item.Description + " ";
-            }
+            var errors = result.Errors.ToString();
+            //foreach (var item in errors)
+            //{
+            //    listErrors += item.Description + " ";
+            //}
 
-            return listErrors;
+            return errors;
         }
 
     }

@@ -11,7 +11,7 @@ class Login extends Component {
   }
 
   //визивається при зміні даних у пропсах
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps  = (nextProps) => {
     console.log('Change props', nextProps);
     this.setState({
       loading: nextProps.loading,

@@ -1,3 +1,5 @@
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,12 +42,30 @@ namespace Project_HONEY
                   b => b.MigrationsAssembly("Project HONEY")).EnableSensitiveDataLogging()
               );
 
+
+            services.AddHangfire(configuration => configuration
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(Configuration["ConnectionString"], new SqlServerStorageOptions
+        {
+            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            QueuePollInterval = TimeSpan.Zero,
+            UseRecommendedIsolationLevel = true,
+            DisableGlobalLocks = true
+        }));
+            services.AddHangfireServer();
+
             services.AddIdentity<User, IdentityRole>()
            .AddEntityFrameworkStores<EFContext>()
            .AddDefaultTokenProviders();
 
             services.AddTransient<IJWTTokenService, JWTTokenService>();
             services.AddTransient<IQueriesService, QueriesService>();
+
+
+
 
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecretPhrase")));
@@ -106,11 +126,14 @@ namespace Project_HONEY
 
             app.UseRouting();
 
+            app.UseHangfireDashboard();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHangfireDashboard();
             });
 
             app.UseSpa(spa =>

@@ -10,14 +10,14 @@ const intialState = {
 export const panelReducer = (state = intialState, action) => {
     console.log("Reducer working", action);
     switch (action.type) {
-        case types.GETSTUDENT_STARTED:
+        case types.GETSTUDENTSTARTED:
             return {
                 ...state,
                 loading: true,
                 errors: ""
             }
 
-        case types.GETSTUDENT_SUCCESS:
+        case types.GETSTUDENTSUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -27,14 +27,14 @@ export const panelReducer = (state = intialState, action) => {
                 sizePage: action.payload.sizePage
             }
 
-        case types.GETSTUDENT_FAILED:
+        case types.GETSTUDENTFAILED:
             return {
                 ...state,
                 loading: false,
                 errors: action.errors
             }
 
-        case types.SET_CURRENT_PAGE:
+        case types.SETCURRENTPAGE:
             return {
                 ...state,
                 loading: true,
@@ -42,21 +42,21 @@ export const panelReducer = (state = intialState, action) => {
             }
 
 
-            case types.EDITSTUDENT_STARTED:
+            case types.EDITSTUDENTSTARTED:
                 return {
                     ...state,
                     loading: true,
                     errors: ""
                 }
     
-            case types.EDITSTUDENT_SUCCESS:
+            case types.EDITSTUDENTSUCCESS:
                 return {
                     ...state,
                     loading: false,
                     errors: "",
                 }
     
-            case types.EDITSTUDENT_FAILED:
+            case types.EDITSTUDENTFAILED:
                 return {
                     ...state,
                     loading: false,

@@ -3,6 +3,9 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import { connect } from 'react-redux';
+import NavbarService from './services/navbar-service';
+import * as types from './auth/login/types';
+import {Logout} from './auth/login/actions'
 
 class NavMenu extends Component {
 
@@ -11,7 +14,6 @@ class NavMenu extends Component {
     isAuthenticated: this.props.isAuthenticated
   }
 
-  //визивається при зміні даних у пропсах
   UNSAFE_componentWillReceiveProps = (nextProps) => {
     console.log('Change props', nextProps);
     this.setState({
@@ -35,13 +37,13 @@ class NavMenu extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.isAuthenticated)
+    this.setState({
+      isAuthenticated: this.props.isAuthenticated
+    });
   }
 
   render() {
-
-
-    console.log(this.state.isAuthenticated);
+    const {logout } = this.props
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -50,25 +52,51 @@ class NavMenu extends Component {
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
-              <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/panelStudent">Student panel</NavLink>
-                </NavItem>
-              <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/panelCourses">Course manager</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/panel">Student manager</NavLink>
-                </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
-                </NavItem>
-                {this.state.isAuthenticated===true && (<p>Logout</p>)}
+                {
+                  NavbarService.isRole() === "Admin" && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/panelStudent">Student manager</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
+                  NavbarService.isRole() === "Admin" && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/panelCourses">Course manager</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
+                  NavbarService.isRole() === "User" && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/panel">Student panel</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
+                  this.state.isAuthenticated === false && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
+                  this.state.isAuthenticated === false && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
+                  this.state.isAuthenticated === true && (
+                    <NavItem>
+                      <button  className="btn" onClick={logout}>Logout</button>
+                    </NavItem>
+                  )
+                }
               </ul>
             </Collapse>
           </Container>
@@ -79,11 +107,17 @@ class NavMenu extends Component {
 }
 
 const mapState = (stateRedux) => {
-  console.log("mapState navbar ", stateRedux.login.isAuthenticated )
   return {
     isAuthenticated: stateRedux.login.isAuthenticated
   }
 }
 
-export default connect(mapState, null)(NavMenu)
+const mapDispatchToProps = (dispatch) => {
+  return {
+      logout: () => dispatch(Logout)
+  }
+}
+
+
+export default connect(mapState, mapDispatchToProps)(NavMenu)
 

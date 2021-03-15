@@ -9,14 +9,14 @@ const intialState = {
 
 export const panelCoursesReducer = (state = intialState, action) => {
     switch (action.type) {
-        case types.GETCOURSES_STARTED:
+        case types.GETCOURSESSTARTED:
             return {
                 ...state,
                 loading: true,
                 errors: ""
             }
 
-        case types.GETCOURSES_SUCCESS:
+        case types.GETCOURSESSUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -26,14 +26,14 @@ export const panelCoursesReducer = (state = intialState, action) => {
                 sizePage: action.payload.sizePage
             }
 
-        case types.GETCOURSES_FAILED:
+        case types.GETCOURSESFAILED:
             return {
                 ...state,
                 loading: false,
                 errors: action.errors
             }
 
-        case types.SET_CURRENT_PAGE:
+        case types.SETCURRENTPAGE:
             return {
                 ...state,
                 loading: true,
@@ -41,21 +41,21 @@ export const panelCoursesReducer = (state = intialState, action) => {
             }
 
 
-            case types.ADDCOURSES_STARTED:
+            case types.ADDCOURSESSTARTED:
                 return {
                     ...state,
                     loading: true,
                     errors: ""
                 }
     
-            case types.ADDCOURSES_SUCCESS:
+            case types.ADDCOURSESSUCCESS:
                 return {
                     ...state,
                     loading: false,
                     errors: "",
                 }
     
-            case types.ADDCOURSES_FAILED:
+            case types.ADDCOURSESFAILED:
                 return {
                     ...state,
                     loading: false,

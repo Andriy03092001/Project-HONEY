@@ -1,14 +1,26 @@
 import axios from 'axios';
 
 export default class PanelCoursesService {
-    static getCourses(page, q) {
-        if (q !== "")
-            return axios.get(`/api/Courses/courses?page=${page}&searchText=${q}`);
-        else
-            return axios.get(`/api/Courses/courses?page=${page}`);
-    }
+  headers = {
+    'Content-Type': 'application/json',
+  }
 
-    static addCourse(model) {
-        return axios.post(`/api/AdminPanel/addCourse`,model);
+  static getCourses(page, q) {
+    var model = {
+      page: page,
+      searchText: q,
+      pageSize: 15
     }
+    return axios.get(`/api/Courses/courses`, {
+      params: {
+        dto: model
+      }
+    }, {
+      headers: this.headers
+    });
+  }
+
+  static addCourse(model) {
+    return axios.post(`/api/AdminPanel/addCourse`, model);
+  }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project_HONEY.DTO.Models;
+using ProjectHONEY.DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Project_HONEY.Domain.Interfaces
         public void EditStudent(EditStudentDTO dto);
         public void AddCourse(CreateCourseDTO dto);
         public void DeleteCourse(int id);
+        public void SubscriptionStudent(SubscriptionUserDTO dto);
     }
 }

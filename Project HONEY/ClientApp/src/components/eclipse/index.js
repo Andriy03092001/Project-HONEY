@@ -4,7 +4,7 @@ import './index.css';
 class EclipseWidgetContainer extends Component {
     render() {
         return (
-            <div className="my_eclipse" id="dlgProgress">
+            <div className="myeclipse" id="dlgProgress">
                 <div className="progress">
                     <div>
                         <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>

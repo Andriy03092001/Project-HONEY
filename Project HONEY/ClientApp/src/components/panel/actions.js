@@ -3,21 +3,21 @@ import PanelService from './service';
 
 export const getData = (page = 1, q = "") => {
     return (dispatch) => {
-        dispatch({ type: types.GETSTUDENT_STARTED });
-        dispatch({ type: types.SET_CURRENT_PAGE, payload: page });
+        dispatch({ type: types.GETSTUDENTSTARTED });
+        dispatch({ type: types.SETCURRENTPAGE, payload: page });
 
         if(q!=="") {
-            dispatch({ type: types.SET_CURRENT_PAGE, payload: 1 });
+            dispatch({ type: types.SETCURRENTPAGE, payload: 1 });
         }
 
         PanelService.getStudents(page, q)
             .then((response) => {
                 console.log("Data server success:", response.data);
-                dispatch({ type: types.GETSTUDENT_SUCCESS, payload: response.data });
+                dispatch({ type: types.GETSTUDENTSUCCESS, payload: response.data });
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({
-                    type: types.GETSTUDENT_FAILED,
+                    type: types.GETSTUDENTFAILED,
                     errors: err.response.data
                 });
             })
@@ -31,17 +31,17 @@ export const getData = (page = 1, q = "") => {
 
 export const editStudent = (model) => {
     return (dispatch) => {
-        dispatch({ type: types.EDITSTUDENT_STARTED });
+        dispatch({ type: types.EDITSTUDENTSTARTED });
 
         PanelService.editStudents(model)
             .then((response) => {
                 console.log("Data server success:", response.data);
-                dispatch({ type: types.EDITSTUDENT_SUCCESS, payload: response.data });
+                dispatch({ type: types.EDITSTUDENTSUCCESS, payload: response.data });
                 getData();
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({
-                    type: types.EDITSTUDENT_FAILED,
+                    type: types.EDITSTUDENTFAILED,
                     errors: err.response.data
                 });
             })

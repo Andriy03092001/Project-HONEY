@@ -4,15 +4,15 @@ import { push } from 'connected-react-router';
 
 export const registerUser = (model) => {
     return (dispatch) => {
-        dispatch({type: types.REGISTER_STARTED});
+        dispatch({type: types.REGISTERSTARTED});
         RegisterService.registerUser(model)
             .then((response)=>{
-                dispatch({type: types.REGISTER_SUCCESS});
+                dispatch({type: types.REGISTERSUCCESS});
                 dispatch(push('/'));
 
             }, err => {
                 dispatch({
-                    type: types.REGISTER_FAILED,
+                    type: types.REGISTERFAILED,
                     errors: err.response.data
                 });
             })

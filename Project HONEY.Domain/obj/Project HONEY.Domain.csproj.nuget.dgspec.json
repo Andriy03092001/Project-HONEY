@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj",
         "projectName": "Project HONEY.DataAccess",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -67,18 +67,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj",
         "projectName": "Project HONEY.Domain",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.Domain\\Project HONEY.Domain.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -98,11 +98,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
+              "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
               },
-              "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj"
+              "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj"
               }
             }
           }
@@ -117,6 +117,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.19, )"
+            },
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -124,6 +128,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.8.0, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.22.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -141,22 +149,25 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
         "projectName": "Project HONEY.DTO",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DTO\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -176,8 +187,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Desktop\\Project HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
+              "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
               }
             }
           }
@@ -206,7 +217,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

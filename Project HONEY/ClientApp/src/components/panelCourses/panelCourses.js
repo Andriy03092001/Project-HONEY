@@ -19,7 +19,7 @@ class PanelCourses extends Component {
         isModal: false
     }
 
-    UNSAFE_componentWillReceiveProps = (nextProps) => {
+    UNSAFE_componentWillReceiveProps  = (nextProps) => {
         this.setState({
             loading: nextProps.loading,
             errorMessage: nextProps.errors,

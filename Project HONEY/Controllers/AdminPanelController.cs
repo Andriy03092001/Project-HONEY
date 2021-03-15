@@ -7,6 +7,7 @@ using Project_HONEY.Domain.Implementation;
 using Project_HONEY.DTO.Models;
 using Project_HONEY.Helper;
 using Project_STUDENTS.DataAccess.Entity;
+using ProjectHONEY.Domain.ModelArguments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,25 +19,24 @@ namespace Project_HONEY.Controllers
     [ApiController]
     public class AdminPanelController : ControllerBase
     {
-
-        private EFContext _Context;
-        private UserManager<User> _UserManeger;
-        public QueriesService _QueriesService;
-        public CommandService _CommandService;
+        private EFContext Context;
+        private UserManager<User> UserManeger;
+        private QueriesService QueriesService;
+        private DateBaseCommandService CommandService;
 
         public AdminPanelController(EFContext Context, UserManager<User> UserManeger)
         {
-            _UserManeger = UserManeger;
-            _Context = Context;
-            _QueriesService = new QueriesService(_Context, _UserManeger);
-            _CommandService = new CommandService(_Context, _UserManeger); 
+            this.UserManeger = UserManeger;
+            this.Context = Context;
+            QueriesService = new QueriesService(this.Context, this.UserManeger);
+            CommandService = new DateBaseCommandService(this.Context, this.UserManeger);
         }
 
         [HttpGet("students")]
         //[Authorize(Roles = "Admin")]
-        public ListStudentDTO GetStudents(int page = 1, string searchText = "", int pageSize = 15)
+        public ListStudentDTO GetStudents([FromQuery] GetQuerieModel model)//Model
         {
-            return _QueriesService.getStudents(page, searchText, pageSize);
+            return QueriesService.GetStudents(model);
         }
 
         [HttpPut("editStudent")]
@@ -49,13 +49,13 @@ namespace Project_HONEY.Controllers
             }
             else
             {
-                _CommandService.EditStudent(dto);
+                CommandService.EditStudent(dto);
                 return Ok("The student has successfully edited");
             }
         }
 
-
         [HttpPost("addCourse")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AddCourse(CreateCourseDTO dto)
         {
             if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace Project_HONEY.Controllers
             }
             else
             {
-                _CommandService.AddCourse(dto);
+                CommandService.AddCourse(dto);
                 return Ok("The course has successfully added");
             }
         }

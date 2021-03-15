@@ -3,21 +3,21 @@ import PanelCoursesService from './service';
 
 export const getCourse = (page = 1, q = "") => {
     return (dispatch) => {
-        dispatch({ type: types.GETCOURSES_STARTED });
-        dispatch({ type: types.SET_CURRENT_PAGE, payload: page });
+        dispatch({ type: types.GETCOURSESSTARTED });
+        dispatch({ type: types.SETCURRENTPAGE, payload: page });
 
         if(q!=="") {
-            dispatch({ type: types.SET_CURRENT_PAGE, payload: 1 });
+            dispatch({ type: types.SETCURRENTPAGE, payload: 1 });
         }
 
         PanelCoursesService.getCourses(page, q)
             .then((response) => {
                 console.log("Course from server success:", response.data);
-                dispatch({ type: types.GETCOURSES_SUCCESS, payload: response.data });
+                dispatch({ type: types.GETCOURSESSUCCESS, payload: response.data });
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({
-                    type: types.GETCOURSES_FAILED,
+                    type: types.GETCOURSESFAILED,
                     errors: err.response.data
                 });
             })
@@ -30,25 +30,24 @@ export const getCourse = (page = 1, q = "") => {
 
 
 
-// export const addCourse = (model) => {
-//     return (dispatch) => {
-//         dispatch({ type: types.ADDCOURSES_STARTED });
+export const subOnCourse = (model) => {
+    return (dispatch) => {
+        dispatch({ type: types.SUBCOURSESSTARTED });
 
-//         PanelCoursesService.addCourse(model)
-//             .then((response) => {
-//                 console.log("Data server success:", response.data);
-//                 dispatch({ type: types.ADDCOURSES_SUCCESS, payload: response.data });
-//                 getData();
-//             }, err => {
-//                 console.log("error: ", err.response);
-//                 dispatch({
-//                     type: types.ADDCOURSES_FAILED,
-//                     errors: err.response.data
-//                 });
-//             })
-//             .catch(err => {
-//                 console.log("Global server error", err);
-//             }
-//             );
-//     }
-// }
+        PanelCoursesService.subOnCourse(model)
+            .then((response) => {
+                console.log("Data server success:", response.data);
+                dispatch({ type: types.SUBCOURSESSUCCESS, payload: response.data });
+            }, err => {
+                console.log("error: ", err.response);
+                dispatch({
+                    type: types.SUBCOURSESFAILED,
+                    errors: err.response.data
+                });
+            })
+            .catch(err => {
+                console.log("Global server error", err);
+            }
+            );
+    }
+}

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Project_HONEY.Domain.Interfaces;
 using Project_HONEY.DTO.Models;
 using Project_HONEY.Helper;
 using Project_STUDENTS.DataAccess.Entity;
+using ProjectHONEY.Domain.ModelArguments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +14,36 @@ namespace Project_HONEY.Domain.Implementation
 {
     public class QueriesService : IQueriesService
     {
-        private EFContext _Context;
-        private UserManager<User> _UserManeger;
+        private EFContext Context;
+        private UserManager<User> UserManeger;
         public QueriesService(EFContext Context, UserManager<User> UserManeger)
         {
-            _UserManeger = UserManeger;
-            _Context = Context;
+            this.UserManeger = UserManeger;
+            this.Context = Context;
         }
 
-        public ListCoursesDTO getCourses(int page = 1, string searchText = "", int pageSize = 15)
+        public ListCoursesDTO GetCourses(GetQuerieModel model)
         {
-            var listCourses = _Context.Course.Select(t => new CourseDTO
+            var listCourses = Context.Course.AsNoTracking().Select(t => new CourseDTO
             {
                 Id = t.Id,
                 Image = t.Image,
                 Title = t.Title
-            }).ToList().Where(t => t.Title.Contains(searchText));
+            }).Where(t => t.Title.ToLower().Contains(model.searchText.ToLower()));
 
             var count = listCourses.Count();
-            var items = listCourses.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            return new ListCoursesDTO()
+            var items = listCourses.Skip((model.page - 1) * model.pageSize).Take(model.pageSize).ToList();
+            return new ListCoursesDTO
             {
                 Courses = items,
                 totalCount = count,
-                sizePage = pageSize
+                sizePage = model.pageSize
             };
         }
 
-        public ListStudentDTO getStudents(int page = 1, string searchText = "", int pageSize = 15)
+        public ListStudentDTO GetStudents(GetQuerieModel model)
         {
-            var listUsers = _UserManeger.GetUsersInRoleAsync(Constants.UserRole).Result.
+            var listUsers = UserManeger.GetUsersInRoleAsync(Constants.UserRole).Result.
                 Select(t => new StudentDTO
                 {
                     Id = t.Id,
@@ -54,18 +56,20 @@ namespace Project_HONEY.Domain.Implementation
                 })
                 .ToList()
                 .Where(
-                    t => t.Email.ToLower().Contains(searchText.ToLower()) ||
-                    t.Name.ToLower().Contains(searchText.ToLower()) ||
-                    t.LastName.ToLower().Contains(searchText.ToLower()));
+                    t => t.Email.ToLower().Contains(model.searchText.ToLower()) ||
+                    t.Name.ToLower().Contains(model.searchText.ToLower()) ||
+                    t.LastName.ToLower().Contains(model.searchText.ToLower()));
 
             var count = listUsers.Count();
-            var items = listUsers.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var items = listUsers.Skip((model.page - 1) * model.pageSize).Take(model.pageSize).ToList();
             return new ListStudentDTO()
             {
                 Students = items,
                 totalCount = count,
-                sizePage = pageSize
+                sizePage = model.pageSize
             };
         }
+
+
     }
 }

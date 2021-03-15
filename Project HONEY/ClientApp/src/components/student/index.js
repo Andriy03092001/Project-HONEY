@@ -1,6 +1,6 @@
 import StudentPanel from './panelStudent';
 import { connect } from 'react-redux';
-import { getCourse } from './actions';
+import { getCourse, subOnCourse } from './actions';
 
 const mapState = (stateRedux) => {
     return {
@@ -10,8 +10,9 @@ const mapState = (stateRedux) => {
         currentPage: stateRedux.panelCourses.currentPage,
         totalCount: stateRedux.panelCourses.totalCount,
         sizePage: stateRedux.panelCourses.sizePage,
+        successMessage: stateRedux.panelCourses.successMessage
     }
 }
 
 const PanelStudentPage = StudentPanel;
-export default connect(mapState, { getCourse })(PanelStudentPage)
+export default connect(mapState, { getCourse, subOnCourse })(PanelStudentPage)

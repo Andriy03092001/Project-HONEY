@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Project_HONEY.Domain.Implementation;
 using Project_HONEY.DTO.Models;
 using Project_STUDENTS.DataAccess.Entity;
+using ProjectHONEY.Domain.ModelArguments;
+using ProjectHONEY.DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,25 +17,37 @@ namespace Project_HONEY.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private EFContext _Context;
-        private UserManager<User> _UserManeger;
-        public QueriesService _QueriesService;
-        public CommandService _CommandService;
+        private EFContext Context;
+        private UserManager<User> UserManeger;
+        private QueriesService QueriesService;
+        public DateBaseCommandService CommandService;
 
         public CoursesController(EFContext Context, UserManager<User> UserManeger)
         {
-            _UserManeger = UserManeger;
-            _Context = Context;
-            _QueriesService = new QueriesService(_Context, _UserManeger);
-            _CommandService = new CommandService(_Context, _UserManeger);
+            this.UserManeger = UserManeger;
+            this.Context = Context;
+            this.QueriesService = new QueriesService(this.Context, this.UserManeger);
+            this.CommandService = new DateBaseCommandService(this.Context, this.UserManeger);
         }
 
         [HttpGet("courses")]
-        public ListCoursesDTO getCourses(int page = 1, string searchText = "", int pageSize = 8)
+        public ListCoursesDTO GetCourses([FromQuery] GetQuerieModel model)
         {
-            return _QueriesService.getCourses(page, searchText, pageSize);
+            return QueriesService.GetCourses(model);
         }
 
-
+        [HttpPost("subscription")]
+        public IActionResult SubOnCourse([FromBody] SubscriptionUserDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Please, enter all field correct");
+            }
+            else
+            {
+                CommandService.SubscriptionStudent(model);
+                return Ok("The student has successfully signed on course");
+            }
+        }
     }
 }

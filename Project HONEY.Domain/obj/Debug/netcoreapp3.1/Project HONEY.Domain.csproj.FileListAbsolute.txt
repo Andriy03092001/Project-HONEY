@@ -24,3 +24,17 @@ C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\P
 C:\Users\HP\Desktop\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.pdb
 C:\Users\Admin\Desktop\Project HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.dll
 C:\Users\Admin\Desktop\Project HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.pdb
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.AssemblyInfo.cs
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.dll
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.pdb
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.Domain.deps.json
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.Domain.dll
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.Domain.pdb
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DataAccess.dll
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.dll
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DataAccess.pdb
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\bin\Debug\netcoreapp3.1\Project HONEY.DTO.pdb
+C:\Users\Admin\Desktop\Marge project\Project-HONEY\Project HONEY.Domain\obj\Debug\netcoreapp3.1\Project HONEY.Domain.csproj.CopyComplete

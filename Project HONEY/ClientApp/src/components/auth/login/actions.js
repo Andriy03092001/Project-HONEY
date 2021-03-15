@@ -6,18 +6,18 @@ import setAuthorisationToken from '../../../utils/setAuthorisationToken';
 
 export const loginUser = (model) => {
     return (dispatch) => {
-        dispatch({type: types.LOGIN_STARTED});
+        dispatch({type: types.LOGINSTARTED});
         LoginService.loginUser(model)
             .then((response)=>{
                 //console.log("Data server success:", response.data);
                 loginByJWT(response.data, dispatch);
-                dispatch({type: types.LOGIN_SUCCESS});
+                dispatch({type: types.LOGINSUCCESS});
                 dispatch(push('/'));
 
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({
-                    type: types.LOGIN_FAILED,
+                    type: types.LOGINFAILED,
                     errors: err.response.data
                 });
             })
@@ -26,6 +26,12 @@ export const loginUser = (model) => {
             }
         );
     }
+}
+
+export const Logout = (dispatch) => {
+        dispatch({type: types.LOGOUT});
+        localStorage.removeItem("authToken")
+        dispatch(push('/'));
 }
 
 export const loginByJWT = (tokens, dispatch) => {
@@ -37,7 +43,7 @@ export const loginByJWT = (tokens, dispatch) => {
     localStorage.setItem('authToken', token);
     setAuthorisationToken(token);
     dispatch({
-        type: types.LOGIN_SET_CURRENT_USER,
+        type: types.LOGINSETCURRENTUSER,
         user
     });
 

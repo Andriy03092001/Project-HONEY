@@ -1,7 +1,8 @@
-export const LOGIN_STARTED = "auth/LOGIN_STARTED";
-export const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
-export const LOGIN_FAILED = "auth/LOGIN_FAILED";
+export const LOGINSTARTED = "auth/LOGINSTARTED";
+export const LOGINSUCCESS = "auth/LOGINSUCCESS";
+export const LOGINFAILED = "auth/LOGINFAILED";
+
+export const LOGOUT = "auth/LOGOUT";
 
 
-
-export const LOGIN_SET_CURRENT_USER="auth/SET_AUTH_TOKEN";
+export const LOGINSETCURRENTUSER="auth/SETAUTHTOKEN";

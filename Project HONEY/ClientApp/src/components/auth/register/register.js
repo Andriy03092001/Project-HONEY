@@ -12,7 +12,7 @@ class Register extends Component {
 
 
     //визивається при зміні даних у пропсах
-    UNSAFE_componentWillReceiveProps = (nextProps) => {
+    UNSAFE_componentWillReceiveProps  = (nextProps) => {
         console.log('Change props', nextProps);
 
         this.setState({
