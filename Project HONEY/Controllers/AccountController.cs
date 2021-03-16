@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Project_HONEY.Domain.Interfaces;
+using Project_HONEY.DTO.Models;
+using Project_HONEY.Helper;
 using Project_IDA.Domain.Interfaces;
 using Project_student.DTO.Models;
-using Project_student.DTO.Models.Result;
 using Project_STUDENTS.DataAccess.Entity;
 using Project_STUDENTS_API___Angular.Helper;
 using ProjectHONEY.Helper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,18 +24,22 @@ namespace Project_HONEY.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IJWTTokenService jwtTokenService;
+        private readonly IFacebookAuthService facebookAuthService;
+
+
 
         public AccountController(
             EFContext context,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration configuration,
-            IJWTTokenService jWtTokenService)
+            IJWTTokenService jWtTokenService,
+            IFacebookAuthService facebookAuthService)
         {
             this.userManager = userManager;
             this.context = context;
             this.signInManager = signInManager;
             jwtTokenService = jWtTokenService;
+            this.facebookAuthService = facebookAuthService;
         }
 
         [HttpPost("register")]
@@ -119,5 +123,54 @@ namespace Project_HONEY.Controllers
               token = jwtTokenService.CreateToken(user)
           });
         }
+
+        [HttpPost]
+        [Route("facebook-login")]
+        public async Task<IActionResult> LoginWithFacebookAsync([FromBody] UserFacebookLoginDTO model)
+        {
+            var validatedTokenReslt = await facebookAuthService.ValidateAccessTokenAsync(model.accessToken);
+            if (!validatedTokenReslt.Data.is_valid)
+            {
+                return BadRequest("Incorrect facebook login");
+            }
+            else
+            {
+                var userInfo = await facebookAuthService.GetUserInfoAsync(model.accessToken);
+
+                var user = await userManager.FindByEmailAsync(userInfo.email);
+                if (user == null)
+                {
+                    var identityUser = new User
+                    {
+
+                        Email = userInfo.email,
+                        UserName = userInfo.email,
+                        Name = userInfo.first_name,
+                        LastName = userInfo.last_name
+                    };
+
+                    var createdResult = await userManager.CreateAsync(identityUser);
+                    if (!createdResult.Succeeded)
+                    {
+                        return BadRequest("Incorrect facebook login");
+                    }
+                    else
+                    {
+                        return Ok(new
+                        {
+                            token = jwtTokenService.CreateToken(user)
+                        });
+                    }
+                }
+                return Ok(new
+                {
+                    token = jwtTokenService.CreateToken(user)
+                });
+            }
+           
+
+        }
+
+
     }
 }

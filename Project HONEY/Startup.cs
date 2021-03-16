@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Project_HONEY.Domain.Implementation;
 using Project_HONEY.Domain.Interfaces;
+using Project_HONEY.Domain.ModelArguments;
 using Project_IDA.Domain;
 using Project_IDA.Domain.Interfaces;
 using Project_STUDENTS.DataAccess.Entity;
@@ -41,6 +42,16 @@ namespace Project_HONEY
                   opt.UseSqlServer(Configuration["ConnectionString"],
                   b => b.MigrationsAssembly("Project HONEY")).EnableSensitiveDataLogging()
               );
+
+
+            //Facebook auth start
+            var facebookAuthSettings = new FacebookAuthSetting();
+            Configuration.Bind(nameof(FacebookAuthSetting), facebookAuthSettings);
+            services.AddSingleton(facebookAuthSettings);
+
+            services.AddHttpClient();
+            services.AddSingleton<IFacebookAuthService, FacebookAuthService>();
+            //Facebook auth end
 
 
             services.AddHangfire(configuration => configuration

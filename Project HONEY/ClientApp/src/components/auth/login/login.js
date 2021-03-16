@@ -3,6 +3,9 @@ import { Form, Input, Button, Alert } from 'antd';
 import "../../../custom.css";
 import EclipseWidget from '../../eclipse';
 
+import FacebookLogin from 'react-facebook-login';
+
+
 class Login extends Component {
   state = {
     loading: this.props.loading,
@@ -20,6 +23,8 @@ class Login extends Component {
     );
   }
 
+ 
+
   render() {
 
     const onFinish = (values) => {
@@ -30,6 +35,11 @@ class Login extends Component {
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo);
     };
+
+    const responseFacebook = (response) => {
+      console.log(response);
+    }
+
     const { errorMessage, loading } = this.state;
 
     return (
@@ -85,6 +95,13 @@ class Login extends Component {
 
 
         </Form>
+
+        <FacebookLogin
+    appId="702276423773435"
+    autoLoad={true}
+    fields="first_name,last_name,picture,email"
+    callback={responseFacebook} />
+
 
       </Fragment>
     );
