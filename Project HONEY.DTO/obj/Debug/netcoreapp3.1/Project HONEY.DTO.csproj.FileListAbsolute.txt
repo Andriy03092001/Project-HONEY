@@ -46,3 +46,15 @@ C:\Users\Admin\Desktop\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\P
 C:\Users\Admin\Desktop\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.csproj.CopyComplete
 C:\Users\Admin\Desktop\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.dll
 C:\Users\Admin\Desktop\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.pdb
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\bin\Debug\netcoreapp3.1\Project HONEY.DTO.deps.json
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\bin\Debug\netcoreapp3.1\Project HONEY.DTO.dll
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\bin\Debug\netcoreapp3.1\Project HONEY.DTO.pdb
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\bin\Debug\netcoreapp3.1\Project HONEY.DataAccess.dll
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\bin\Debug\netcoreapp3.1\Project HONEY.DataAccess.pdb
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.AssemblyInfo.cs
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.csproj.CopyComplete
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.dll
+C:\Users\HP\Desktop\Honey\Project-HONEY\Project HONEY.DTO\obj\Debug\netcoreapp3.1\Project HONEY.DTO.pdb

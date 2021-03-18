@@ -762,23 +762,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Honey\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
       "projectName": "Project HONEY.DTO",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DTO\\obj\\",
+      "projectPath": "C:\\Users\\HP\\Desktop\\Honey\\Project-HONEY\\Project HONEY.DTO\\Project HONEY.DTO.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\Honey\\Project-HONEY\\Project HONEY.DTO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -792,8 +792,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
+            "C:\\Users\\HP\\Desktop\\Honey\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\HP\\Desktop\\Honey\\Project-HONEY\\Project HONEY.DataAccess\\Project HONEY.DataAccess.csproj"
             }
           }
         }
@@ -822,7 +822,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

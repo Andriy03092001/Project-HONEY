@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
 import "../../../custom.css";
 import EclipseWidget from '../../eclipse';
@@ -14,7 +14,7 @@ class Login extends Component {
   }
 
   //визивається при зміні даних у пропсах
-  UNSAFE_componentWillReceiveProps  = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     console.log('Change props', nextProps);
     this.setState({
       loading: nextProps.loading,
@@ -23,7 +23,6 @@ class Login extends Component {
     );
   }
 
- 
 
   render() {
 
@@ -37,8 +36,16 @@ class Login extends Component {
     };
 
     const responseFacebook = (response) => {
-      console.log(response);
+      var model = {
+        first_name: response.first_name,
+        last_name: response.last_name,
+        email: response.email,
+        accessToken: response.accessToken
+      }
+
+      this.props.loginFacebook(model);
     }
+    
 
     const { errorMessage, loading } = this.state;
 
@@ -97,10 +104,10 @@ class Login extends Component {
         </Form>
 
         <FacebookLogin
-    appId="702276423773435"
-    autoLoad={true}
-    fields="first_name,last_name,picture,email"
-    callback={responseFacebook} />
+          appId="702276423773435"
+          autoLoad={false}
+          fields="first_name,last_name,picture,email"
+          callback={responseFacebook} />
 
 
       </Fragment>

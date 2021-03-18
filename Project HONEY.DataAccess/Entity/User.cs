@@ -18,8 +18,5 @@ namespace Project_STUDENTS.DataAccess.Entity
         public string RegisteredDate { get; set; }
 
         public string StudyDate { get; set; }
-
-
-        //public virtual UserAdditionalInfo UserAdditionalInfo { get; set; }
     }
 }

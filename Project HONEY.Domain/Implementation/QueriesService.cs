@@ -52,7 +52,14 @@ namespace Project_HONEY.Domain.Implementation
                     Email = t.Email,
                     LastName = t.LastName,
                     RegisteredDate = t.RegisteredDate,
-                    StudyDate = t.StudyDate
+                    StudyDate = t.StudyDate,
+                   
+                    //Get courses 
+                    Courses = Context.UserSubscriptions.Where(r=>r.UserId == t.Id).Select(y => new CourseDTO { 
+                        Id = y.Id,
+                        Image = Context.Course.FirstOrDefault(u=>u.Id == y.CourseId).Image,
+                        Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title
+                    }).ToList()
                 })
                 .ToList()
                 .Where(

@@ -135,18 +135,17 @@ namespace Project_HONEY.Controllers
             }
             else
             {
-                var userInfo = await facebookAuthService.GetUserInfoAsync(model.accessToken);
-
-                var user = await userManager.FindByEmailAsync(userInfo.email);
+                var user = await userManager.FindByEmailAsync(model.email);
                 if (user == null)
                 {
                     var identityUser = new User
                     {
-
-                        Email = userInfo.email,
-                        UserName = userInfo.email,
-                        Name = userInfo.first_name,
-                        LastName = userInfo.last_name
+                        Email = model.email,
+                        UserName = model.email,
+                        Name = model.first_name,
+                        LastName = model.last_name,
+                        Age = 0,
+                        RegisteredDate = DateTime.UtcNow.ToShortDateString()
                     };
 
                     var createdResult = await userManager.CreateAsync(identityUser);
@@ -156,9 +155,11 @@ namespace Project_HONEY.Controllers
                     }
                     else
                     {
+
+                        await userManager.AddToRoleAsync(identityUser, "User");
                         return Ok(new
                         {
-                            token = jwtTokenService.CreateToken(user)
+                            token = jwtTokenService.CreateToken(identityUser)
                         });
                     }
                 }

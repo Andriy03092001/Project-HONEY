@@ -1,9 +1,8 @@
 import Login from './login';
-import {connect} from 'react-redux';
-import {loginUser} from './actions';
+import { connect } from 'react-redux';
+import { loginUser, loginFacebook } from './actions';
 
-const mapState = (stateRedux) =>
-{
+const mapState = (stateRedux) => {
     return {
         loading: stateRedux.login.loading,
         errors: stateRedux.login.errors,
@@ -11,4 +10,4 @@ const mapState = (stateRedux) =>
 }
 
 const LoginPage = Login;
-export default connect(mapState, {loginUser})(LoginPage)
+export default connect(mapState, { loginUser, loginFacebook })(LoginPage)

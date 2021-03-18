@@ -13,5 +13,6 @@ namespace Project_HONEY.DTO.Models
         public string Email { get; set; }
         public string RegisteredDate { get; set; }
         public string StudyDate { get; set; }
+        public List<CourseDTO> Courses { get; set; }
     }
 }
