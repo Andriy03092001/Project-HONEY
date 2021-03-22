@@ -91,6 +91,13 @@ class NavMenu extends Component {
                   )
                 }
                 {
+                  NavbarService.isRole() === "User" && (
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/profile">Profile</NavLink>
+                    </NavItem>
+                  )
+                }
+                {
                   this.state.isAuthenticated === true && (
                     <NavItem>
                       <button  className="btn" onClick={logout}>Logout</button>

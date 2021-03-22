@@ -5,7 +5,7 @@ export default class PanelCoursesService {
     'Content-Type': 'application/json',
   }
 
-  static getCourses(page, q) {
+  static getCourses(page = 1, q = "") {
     var model = {
       page: page,
       searchText: q,

@@ -61,6 +61,8 @@ namespace Project_HONEY.Domain.Implementation
                 UserId = dto.UserId
             });
 
+            Context.Users.FirstOrDefault(t => t.Id == dto.UserId).StudyDate = dto.StartDate.ToShortDateString();
+
             var student = Context.Users.FirstOrDefault(t => t.Id == dto.UserId);
             if (student!=null) {
                 var currentDate = DateTime.UtcNow;

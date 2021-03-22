@@ -1,4 +1,5 @@
-﻿using Project_HONEY.DTO.Models;
+﻿using Project_HONEY.DTO;
+using Project_HONEY.DTO.Models;
 using ProjectHONEY.Domain.ModelArguments;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,7 @@ namespace Project_HONEY.Domain.Interfaces
     {
         public ListStudentDTO GetStudents(GetQuerieModel model);
         public ListCoursesDTO GetCourses(GetQuerieModel model);
+        public ProfileDTO GetProfile(string id);
+
     }
 }

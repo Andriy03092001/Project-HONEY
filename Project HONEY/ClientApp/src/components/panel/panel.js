@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Table, Input, Button, Modal, Form, InputNumber } from 'antd';
+import { Table, Input, Button, Modal, Form, InputNumber,Card } from 'antd';
 import EclipseWidget from '../eclipse';
 import "./style.css";
 const { Search } = Input;
@@ -21,7 +21,7 @@ class Panel extends Component {
 
 
     //визивається при зміні даних у пропсах
-    UNSAFE_componentWillReceiveProps  = (nextProps) => {
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
         console.log('Students: ', nextProps);
         this.setState({
             loading: nextProps.loading,
@@ -46,6 +46,8 @@ class Panel extends Component {
             isEditModal: false
         })
     };
+
+
 
 
     showModel = (id) => {
@@ -93,11 +95,16 @@ class Panel extends Component {
             console.log('Failed:', errorInfo);
         };
 
-        const columns = [
+        const columnsCourses = [
             {
-                title: 'Id',
-                dataIndex: 'id',
-            },
+                title: 'This student is enrolled in courses:',
+                dataIndex: 'title',
+               
+            }
+        ]
+           
+
+        const columns = [
             {
                 title: 'Name',
                 dataIndex: 'name',
@@ -110,7 +117,7 @@ class Panel extends Component {
                 dataIndex: 'lastName',
                 sorter: {
                     compare: (a, b) => a.lastName.length - b.lastName.length,
-                },
+                }
             },
             {
                 title: 'Age',
@@ -153,12 +160,21 @@ class Panel extends Component {
         for (let i = 1; i <= Math.ceil(this.state.totalCount / this.state.sizePage); i++) {
             pages.push(i);
         }
+
+        const tableProps = {
+            expandedRowRender: record => (console.log(record.courses),
+              <Table  columns={columnsCourses} dataSource={record.courses} pagination={false}/>
+            )
+          };
+
         return (
             <Fragment>
                 <h2>Students manager:</h2>
                 <div className="main-panel">
                     <Search placeholder="Search..." onSearch={this.onSearch} enterButton ></Search>
-                    <Table columns={columns} dataSource={this.state.students} pagination={false} ></Table>
+                    
+                    <Table {...tableProps} columns={columns} dataSource={this.state.students} pagination={false} ></Table>
+
                 </div>
                 {totalCount > 0 && <div className="pagination text-center">
                     {pages.map((page, index) =>
@@ -171,8 +187,8 @@ class Panel extends Component {
 
                 <Modal title="Edit student" visible={this.state.isEditModal} onCancel={this.handleCancel}>
                     <Form {...layout} name="basic" initialValues={{
-                            remember: true,
-                        }} onFinish={onFinish} onFinishFailed={onFinishFailed} >
+                        remember: true,
+                    }} onFinish={onFinish} onFinishFailed={onFinishFailed} >
 
                         <Form.Item label="Email" name="email" >
                             <Input placeholder={this.state.editStudent.email} />

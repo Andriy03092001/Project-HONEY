@@ -55,7 +55,7 @@ export const panelCoursesReducer = (state = intialState, action) => {
                     errors: "",
                 }
     
-            case types.ADDCOURSESFAILED:
+                case types.ADDCOURSESFAILED:
                 return {
                     ...state,
                     loading: false,

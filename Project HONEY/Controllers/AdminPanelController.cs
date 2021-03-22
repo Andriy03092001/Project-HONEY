@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_HONEY.Domain.Implementation;
+using Project_HONEY.DTO;
 using Project_HONEY.DTO.Models;
 using Project_HONEY.Helper;
 using Project_STUDENTS.DataAccess.Entity;
@@ -67,6 +68,14 @@ namespace Project_HONEY.Controllers
                 CommandService.AddCourse(dto);
                 return Ok("The course has successfully added");
             }
+        }
+
+
+        [HttpGet("profile")]
+        //[Authorize]
+        public ProfileDTO Profile([FromQuery] string id)
+        {
+            return QueriesService.GetProfile(id);
         }
 
     }

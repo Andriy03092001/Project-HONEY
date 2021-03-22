@@ -6,7 +6,7 @@ namespace Project_HONEY.DTO.Models
 {
     public class StudentDTO
     {
-        public string Id { get; set; }
+        public string Key { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }

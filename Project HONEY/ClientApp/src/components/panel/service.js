@@ -6,14 +6,14 @@ export default class StudentService {
         'Content-Type': 'application/json',
       }
 
-    static getStudents(page, q) {
+    static getStudents(page = 1, q = "") {
         var model = {
             page: page,
             searchText: q,
             pageSize: 15
         }
         return axios.get(`/api/AdminPanel/students`, {
-          params: {
+          body: {
             dto: model
           }
         },{

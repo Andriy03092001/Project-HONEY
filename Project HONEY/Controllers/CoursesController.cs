@@ -20,7 +20,7 @@ namespace Project_HONEY.Controllers
         private EFContext Context;
         private UserManager<User> UserManeger;
         private QueriesService QueriesService;
-        public DateBaseCommandService CommandService;
+        private DateBaseCommandService CommandService;
 
         public CoursesController(EFContext Context, UserManager<User> UserManeger)
         {
@@ -31,9 +31,9 @@ namespace Project_HONEY.Controllers
         }
 
         [HttpGet("courses")]
-        public ListCoursesDTO GetCourses([FromQuery] GetQuerieModel model)
+        public ListCoursesDTO GetCourses([FromQuery]GetQuerieModel dto)
         {
-            return QueriesService.GetCourses(model);
+            return QueriesService.GetCourses(dto);
         }
 
         [HttpPost("subscription")]

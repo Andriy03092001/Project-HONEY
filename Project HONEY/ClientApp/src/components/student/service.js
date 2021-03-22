@@ -5,7 +5,7 @@ export default class PanelCoursesService {
         'Content-Type': 'application/json',
     }
 
-    static getCourses(page, q) {
+    static getCourses(page = 1, q = "") {
         var model = {
             page: page,
             searchText: q,
@@ -16,6 +16,12 @@ export default class PanelCoursesService {
               dto: model
             }
           }, {
+            headers: this.headers
+        });
+    }
+
+    static getProfile(id) {
+        return axios.get(`/api/AdminPanel/profile?id=${id}`, {
             headers: this.headers
         });
     }

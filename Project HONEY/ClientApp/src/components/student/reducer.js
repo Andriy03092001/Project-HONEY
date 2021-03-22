@@ -34,6 +34,31 @@ export const panelStudentReducer = (state = intialState, action) => {
                 errors: action.errors
             }
 
+            case types.GETPROFILESTARTED:
+                return {
+                    ...state,
+                    loading: true,
+                    errors: ""
+                }
+    
+            case types.GETPROFILESSUCCESS:
+                return {
+                    ...state,
+                    loading: false,
+                    errors: "",
+                    courses: action.payload.courses,
+                    fullName: action.payload.fullName,
+                    email: action.payload.email,
+                    age: action.payload.age,
+                }
+    
+            case types.GETPROFILEFAILED:
+                return {
+                    ...state,
+                    loading: false,
+                    errors: action.errors
+                }
+
         case types.SETCURRENTPAGE:
             return {
                 ...state,

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project_HONEY.Domain.Interfaces;
 using Project_HONEY.DTO.Models;
-using Project_HONEY.Helper;
 using Project_IDA.Domain.Interfaces;
 using Project_student.DTO.Models;
 using Project_STUDENTS.DataAccess.Entity;
@@ -26,14 +25,13 @@ namespace Project_HONEY.Controllers
         private readonly IJWTTokenService jwtTokenService;
         private readonly IFacebookAuthService facebookAuthService;
 
-
-
         public AccountController(
             EFContext context,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IJWTTokenService jWtTokenService,
-            IFacebookAuthService facebookAuthService)
+            IFacebookAuthService facebookAuthService
+           )
         {
             this.userManager = userManager;
             this.context = context;
@@ -41,6 +39,11 @@ namespace Project_HONEY.Controllers
             jwtTokenService = jWtTokenService;
             this.facebookAuthService = facebookAuthService;
         }
+
+
+      
+
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto model)

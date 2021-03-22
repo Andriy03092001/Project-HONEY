@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Project_HONEY.Domain.Interfaces;
+using Project_HONEY.DTO;
 using Project_HONEY.DTO.Models;
 using Project_HONEY.Helper;
 using Project_STUDENTS.DataAccess.Entity;
@@ -41,12 +42,31 @@ namespace Project_HONEY.Domain.Implementation
             };
         }
 
+        public ProfileDTO GetProfile(string id)
+        {
+            var user = Context.Users.FirstOrDefault(t => t.Id == id);
+
+            ProfileDTO profile = new ProfileDTO
+            {
+                Age = user.Age,
+                Email = user.Email,
+                FullName = user.Name + " " + user.LastName,
+                Courses = Context.UserSubscriptions.Where(r => r.UserId == user.Id).Select(y => new CourseDTO
+                {
+                    Id = y.Id,
+                    Image = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Image,
+                    Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title
+                }).ToList()
+            };
+            return profile;
+        }
+
         public ListStudentDTO GetStudents(GetQuerieModel model)
         {
             var listUsers = UserManeger.GetUsersInRoleAsync(Constants.UserRole).Result.
                 Select(t => new StudentDTO
                 {
-                    Id = t.Id,
+                    Key = t.Id,
                     Name = t.Name,
                     Age = t.Age,
                     Email = t.Email,

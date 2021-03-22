@@ -6,6 +6,7 @@ import { Home } from './components/Home';
 import PanelPage from './components/panel/index';
 import PanelCoursesPage from './components/panelCourses/index'
 import PanelStudentPage from './components/student/index'
+import ProfilePage from './components/student/profileIndex'
 import {PrivateRoute} from './components/privateRouter'
 
 import './custom.css'
@@ -31,7 +32,7 @@ export default class App extends Component {
 
           <PrivateRoute exact path="/panelCourses" roles={"Admin"} component={PanelCoursesPage} /> {/* Admin panel with courses-manager */}
           <PrivateRoute exact path="/panelStudent" roles={"Admin"} component={PanelPage} />{/* Admin panel with student-manager */}
-
+          <PrivateRoute exact path="/profile" roles={"User"} component={ProfilePage} />
 
         </div>
         </Suspense>
