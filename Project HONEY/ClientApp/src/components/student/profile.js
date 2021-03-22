@@ -65,15 +65,16 @@ class Profile extends Component {
                         <h3>Courses I have subscribed to:</h3>
                         <div className="site-card-wrapper">
                             <div className="row">
-
                                 {this.state.courses.map((course, index) =>
-                                    <div className="col-4">
+                                    <div className="col-4" key={index}>
                                         <Card
                                             hoverable
                                             style={{ width: 240, marginTop: 10, height: 300 }}
                                             cover={<img height="200px" alt="example" src={course.image} />}
                                         >
                                            <h4>{course.title}</h4>
+                                           <h4>{course.title}</h4>
+
                                         </Card>
                                     </div>
 
@@ -83,7 +84,7 @@ class Profile extends Component {
                             {totalCount > 0 && <div className="pagination text-center">
                                 {pages.map((page, index) =>
                                     <span className={currentPage === page ? "active" : "page"}
-                                        key={index}
+                                        
                                         onClick={() => this.props.getData(page)}>
                                         {page}
                                     </span>)}

@@ -10,5 +10,11 @@ namespace ProjectHONEY.Domain.ModelArguments
         public int page { get; set; }
         public string searchText { get; set; }
         public int pageSize { get; set; }
+
+        public GetQuerieModel()
+        {
+            searchText = "";
+        }
+
     }
 }

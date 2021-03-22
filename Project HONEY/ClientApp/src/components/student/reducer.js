@@ -5,7 +5,10 @@ const intialState = {
     totalCount: 0,
     currentPage: 1,
     sizePage: 8,
-    successMessage: ""
+    successMessage: "",
+    fullName: "",
+    email: "",
+    age:""
 }
 
 export const panelStudentReducer = (state = intialState, action) => {

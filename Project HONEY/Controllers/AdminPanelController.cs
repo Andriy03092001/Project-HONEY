@@ -35,7 +35,7 @@ namespace Project_HONEY.Controllers
 
         [HttpGet("students")]
         //[Authorize(Roles = "Admin")]
-        public ListStudentDTO GetStudents([FromQuery] GetQuerieModel model)//Model
+        public ListStudentDTO GetStudents([FromQuery] GetQuerieModel model)
         {
             return QueriesService.GetStudents(model);
         }

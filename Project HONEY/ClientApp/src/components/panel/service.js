@@ -7,18 +7,12 @@ export default class StudentService {
       }
 
     static getStudents(page = 1, q = "") {
-        var model = {
-            page: page,
-            searchText: q,
-            pageSize: 15
-        }
-        return axios.get(`/api/AdminPanel/students`, {
-          body: {
-            dto: model
-          }
-        },{
-            headers: this.headers
-          });
+          var base_url = `/api/AdminPanel/students?page=${page}&pageSize=15`;
+          if(q===""){
+            return axios.get(base_url);
+          } else {
+            return axios.get(base_url+`&searchText=${q}`);
+          }    
     }
 
     static editStudents(model) {

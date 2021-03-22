@@ -15,4 +15,4 @@ const mapState = (stateRedux) => {
 }
 
 const ProfilePage = Profile;
-export default connect(mapState, {getProfile })(ProfilePage)
+export default connect(mapState, { getProfile })(ProfilePage)

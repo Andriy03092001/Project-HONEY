@@ -63,7 +63,7 @@ export const subOnCourse = (model) => {
             .then((response) => {
                 console.log("Data server success:", response.data);
                 dispatch({ type: types.SUBCOURSESSUCCESS, payload: response.data });
-                dispatch(push('/profile'));
+                dispatch(push('/'));
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({

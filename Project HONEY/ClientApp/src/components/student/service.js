@@ -6,18 +6,12 @@ export default class PanelCoursesService {
     }
 
     static getCourses(page = 1, q = "") {
-        var model = {
-            page: page,
-            searchText: q,
-            pageSize: 15
-        }
-        return axios.get(`/api/Courses/courses`, {
-            params: {
-              dto: model
-            }
-          }, {
-            headers: this.headers
-        });
+        var base_url = `/api/Courses/courses?page=${page}&pageSize=8`;
+        if(q===""){
+          return axios.get(base_url);
+        } else {
+          return axios.get(base_url+`&searchText=${q}`);
+        }   
     }
 
     static getProfile(id) {
