@@ -33,8 +33,7 @@ namespace Project_STUDENTS_API___Angular.Helper
         public static string GetErrorsByIdentityResult(
                                                     IdentityResult result)
         {
-            string listErrors = "";
-            var errors = result.Errors.ToString();
+            var errors = result.Errors.First().Description.ToString();
             //foreach (var item in errors)
             //{
             //    listErrors += item.Description + " ";

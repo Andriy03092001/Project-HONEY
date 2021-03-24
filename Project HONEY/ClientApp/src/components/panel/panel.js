@@ -109,7 +109,7 @@ class Panel extends Component {
                 title: 'Name',
                 dataIndex: 'name',
                 sorter: {
-                    compare: (a, b) => a.body.length - b.body.length,
+                    compare: (a, b) => a.name.length - b.name.length,
                 },
             },
             {

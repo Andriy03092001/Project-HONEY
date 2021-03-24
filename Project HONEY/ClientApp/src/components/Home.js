@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import { Steps, Button, message } from 'antd';
+import { Steps, Button, message, Carousel } from 'antd';
 const { Step } = Steps;
 
 
@@ -25,8 +25,22 @@ export class Home extends Component {
     current: 0
   }
 
+  onChange(a, b, c) {
+    console.log(a, b, c);
+  }
 
   render() {
+
+
+
+
+    const contentStyle = {
+      height: '360px',
+      color: '#fff',
+      lineHeight: '160px',
+      textAlign: 'center',
+      background: '#364d79',
+    };
 
     const { current, steps } = this.state;
 
@@ -53,33 +67,49 @@ export class Home extends Component {
           </p>
         </div>
 
-        <Steps current={current}>
-          {steps.map(item => (
-            <Step key={item.title} title={item.title} />
-          ))}
-        </Steps>
 
-        <div className="steps-content">{steps[current].content}</div>
-        <div className="steps-action">
-          {current < steps.length - 1 && (
-            <Button type="primary" onClick={() => next()}>
-              Next
-            </Button>
-          )}
-          {current === steps.length - 1 && (
-            <Button type="primary" onClick={() => message.success('Processing complete!')}>
-              Done
-            </Button>
-          )}
-          {current > 0 && (
-            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-              Previous
-            </Button>
-          )}
+        <Carousel afterChange={this.onChange}>
+          <div>
+            <img className="imgCarousel" src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200309202057/How-To-Learn-ReactJS-A-Complete-Guide-For-Beginners.jpg"></img>
+          </div>
+          <div>
+            <img className="imgCarousel" src="https://hackr.io/blog/why-should-you-learn-angular/thumbnail/large"></img>
+          </div>
+          <div>
+            <img className="imgCarousel" src="http://jason-jones.co.uk/wp-content/uploads/2017/02/aspnetcoreblog_header-1140x571.png"></img>
+          </div>
+        </Carousel>,
+
+
+        <div className="p100">
+          <h2 className="base-color text-center">Steps for study on course</h2>
+          <Steps current={current}>
+            {steps.map(item => (
+              <Step key={item.title} title={item.title} />
+            ))}
+          </Steps>
+
+          <h2 className="steps-content">{steps[current].content}</h2>
+          <div className="steps-action">
+            {current < steps.length - 1 && (
+              <Button type="primary" onClick={() => next()}>
+                Next
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                Done
+              </Button>
+            )}
+            {current > 0 && (
+              <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+                Previous
+              </Button>
+            )}
+          </div>
         </div>
 
 
-      
 
       </Fragment>
 

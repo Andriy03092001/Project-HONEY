@@ -54,7 +54,7 @@ class Login extends Component {
 
         <div class="login-page">
           <div class="form">
-            <h2>Login </h2>
+            <h2 className="base-color">Login </h2>
             <Form
 
               name="basic"
@@ -64,43 +64,44 @@ class Login extends Component {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
-                <label>Email:</label>
+              <label>Email:</label>
 
               <Form.Item
 
                 name="email"
-               
+
                 rules={[
                   {
                     required: true,
                     message: 'Please input your email!',
+                    type: 'email'
                   },
                 ]}
               >
-                <Input   />
+                <Input />
               </Form.Item>
 
               <label>Password:</label>
               <Form.Item
 
-name="password"
-rules={[
+                name="password"
+                rules={[
                   {
                     required: true,
                     message: 'Please input your password!',
                   },
                 ]}
-                >
-                <Input.Password  />
+              >
+                <Input.Password />
               </Form.Item>
-              {errorMessage ? (<Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
+              {errorMessage ? (<Alert message={errorMessage} type="error" className="m10" showIcon />) : (<p></p>)}
 
               <Form.Item >
                 <button className="my-btn" type="submit">
                   Submit
               </button>
               </Form.Item>
-                <label className="text-center">OR</label>
+              <label className="text-center">OR</label>
 
             </Form>
 
@@ -108,13 +109,13 @@ rules={[
               appId="702276423773435"
               autoLoad={false}
               fields="first_name,last_name,picture,email"
-              callback={responseFacebook} 
+              callback={responseFacebook}
               cssClass="my-btn"
-              />
+            />
 
           </div>
         </div>
-              {loading && <EclipseWidget />}
+        {loading && <EclipseWidget />}
       </Fragment>
     );
 

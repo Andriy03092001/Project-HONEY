@@ -15,18 +15,31 @@ code {
   border-color: #1861ac;
 }
 
+.m10{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.p100{
+  margin-top: 100px;
+  margin-bottom:100px;
+}
 
 .p10{
   padding: 10px;
 }
 
+.imgCarousel{
+  width: 100%;
+}
 
 .base-color {
+
   color: #1890ff !important;
 }
 
 .steps-content {
-  min-height: 100px;
+  min-height: 200px;
   margin-top: 7px;
   padding-top: 40px;
   text-align: center;

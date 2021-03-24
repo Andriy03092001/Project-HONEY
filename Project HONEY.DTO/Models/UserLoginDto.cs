@@ -8,7 +8,6 @@ namespace Project_student.DTO.Models
     public class UserLoginDto
     {
         [Required(ErrorMessage = "Введіть електронну пошту")]
-        [EmailAddress(ErrorMessage = "Некоректно введена електронна пошта")]
         public string Email { get; set; }
 
      

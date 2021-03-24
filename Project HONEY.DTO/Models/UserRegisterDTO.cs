@@ -21,7 +21,6 @@ namespace Project_student.DTO.Models
 
         [Required(ErrorMessage = "Введіть електронну пошту")]
         [EmailAddress(ErrorMessage = "Некоректно введена електронна пошта")]
-        [CustomEmail(ErrorMessage = "Така електронна пошта вже зареєстрована")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Введіть пароль")]

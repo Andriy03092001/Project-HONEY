@@ -39,7 +39,7 @@ class Register extends Component {
         return (
             <div class="login-page">
                 <div class="form">
-                    <h2>Register </h2>
+                    <h2 className="base-color">Register </h2>
                     <Form
                         name="basic"
                         initialValues={{
@@ -148,13 +148,14 @@ class Register extends Component {
                             <Input.Password />
                         </Form.Item>
 
+                        {errorMessage ? (<Alert message={errorMessage} type="error" className="m10" showIcon />) : (<p></p>)}
 
                         <Form.Item >
                             <Button type="primary" htmlType="submit">
                                 Submit
           </Button>
                         </Form.Item>
-                        {errorMessage ? (<Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
+                      
                         {loading && <EclipseWidget />}
 
                     </Form>
