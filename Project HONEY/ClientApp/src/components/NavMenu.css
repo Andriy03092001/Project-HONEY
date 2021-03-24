@@ -2,6 +2,12 @@
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: #1890ff !important;
+  font-weight: bold;
+}
+
+.text-dark{
+  color: #1890ff !important;
 }
 
 html {

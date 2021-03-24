@@ -72,7 +72,7 @@ class NavMenu extends Component {
                 {
                   NavbarService.isRole() === "User" && (
                     <NavItem>
-                      <NavLink tag={Link} className="text-dark" to="/panel">Student panel</NavLink>
+                      <NavLink tag={Link} className="text-dark" to="/panel">Courses</NavLink>
                     </NavItem>
                   )
                 }
@@ -86,7 +86,7 @@ class NavMenu extends Component {
                 {
                   this.state.isAuthenticated === false && (
                     <NavItem>
-                      <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
+                      <NavLink tag={Link} type="primary" className="text-dark" to="/register">Register</NavLink>
                     </NavItem>
                   )
                 }

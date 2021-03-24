@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, InputNumber, Alert  } from 'antd';
+import { Form, Input, Button, InputNumber, Alert } from 'antd';
 import "../../../custom.css";
 import EclipseWidget from '../../eclipse';
+import '../form.css';
 class Register extends Component {
 
     state = {
@@ -12,7 +13,7 @@ class Register extends Component {
 
 
     //визивається при зміні даних у пропсах
-    UNSAFE_componentWillReceiveProps  = (nextProps) => {
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
         console.log('Change props', nextProps);
 
         this.setState({
@@ -24,7 +25,7 @@ class Register extends Component {
     }
 
 
-    
+
     render() {
         const onFinish = (values) => {
             console.log('Success:', values);
@@ -34,127 +35,132 @@ class Register extends Component {
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
-        const {errorMessage,loading} = this.state;
+        const { errorMessage, loading } = this.state;
         return (
-            <Form
-                name="basic"
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-            >
+            <div class="login-page">
+                <div class="form">
+                    <h2>Register </h2>
+                    <Form
+                        name="basic"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                    >
 
-                <h2>Register </h2>
-                <label className="text-center">Name:</label>
+                        <label className="text-center">Name:</label>
 
-                <Form.Item
+                        <Form.Item
 
-                    name="name"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your name!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your name!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                <label className="text-center">Last name:</label>
+                        <label className="text-center">Last name:</label>
 
-                <Form.Item
+                        <Form.Item
 
-                    name="lastName"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your last name!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-
-
-                <label className="text-center">Age:</label>
-                <Form.Item
-                    name="age"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your age!',
-                        },
-                    ]}
-                >
-                    <InputNumber />
-                </Form.Item>
+                            name="lastName"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your last name!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
 
-
-                <label className="text-center">Email:</label>
-                <Form.Item
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email!',
-                            type: 'email'
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <label className="text-center">Password:</label>
-                <Form.Item
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                        <label className="text-center">Age:</label>
+                        <Form.Item
+                            name="age"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your age!',
+                                },
+                            ]}
+                        >
+                            <InputNumber />
+                        </Form.Item>
 
 
 
-                <label className="text-center">Confirm password:</label>
-                <Form.Item
-                    name="confirm"
-                    label=""
-                    dependencies={['password']}
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please confirm your password!',
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject('The two passwords that you entered do not match!');
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                        <label className="text-center">Email:</label>
+                        <Form.Item
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your email!',
+                                    type: 'email'
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+                        <label className="text-center">Password:</label>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
 
 
-                <Form.Item >
-                    <Button type="primary" htmlType="submit">
-                        Submit
+
+                        <label className="text-center">Confirm password:</label>
+                        <Form.Item
+                            name="confirm"
+                            label=""
+                            dependencies={['password']}
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please confirm your password!',
+                                },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject('The two passwords that you entered do not match!');
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+
+
+                        <Form.Item >
+                            <Button type="primary" htmlType="submit">
+                                Submit
           </Button>
-                </Form.Item>
-                {errorMessage ? ( <Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
-                {loading && <EclipseWidget />}
+                        </Form.Item>
+                        {errorMessage ? (<Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
+                        {loading && <EclipseWidget />}
 
-            </Form>
+                    </Form>
+
+                </div>
+            </div>
 
         );
 

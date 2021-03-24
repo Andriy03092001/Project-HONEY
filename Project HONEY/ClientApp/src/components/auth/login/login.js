@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Form, Input, Button, Alert } from 'antd';
 import "../../../custom.css";
 import EclipseWidget from '../../eclipse';
-
+import '../form.css';
 import FacebookLogin from 'react-facebook-login';
 
 
@@ -45,71 +45,76 @@ class Login extends Component {
 
       this.props.loginFacebook(model);
     }
-    
+
 
     const { errorMessage, loading } = this.state;
 
     return (
       <Fragment>
-        <Form
 
-          name="basic"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
+        <div class="login-page">
+          <div class="form">
+            <h2>Login </h2>
+            <Form
 
-          <h2>Login </h2>
-          <label className="text-center">Email:</label>
+              name="basic"
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+            >
+                <label>Email:</label>
 
-          <Form.Item
+              <Form.Item
 
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your email!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+                name="email"
+               
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your email!',
+                  },
+                ]}
+              >
+                <Input   />
+              </Form.Item>
 
-          <label>Password:</label>
-          <Form.Item
+              <label>Password:</label>
+              <Form.Item
 
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+name="password"
+rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+                >
+                <Input.Password  />
+              </Form.Item>
+              {errorMessage ? (<Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
 
-          <Form.Item >
-            <Button type="primary" htmlType="submit">
-              Submit
-              </Button>
-          </Form.Item>
+              <Form.Item >
+                <button className="my-btn" type="submit">
+                  Submit
+              </button>
+              </Form.Item>
+                <label className="text-center">OR</label>
 
-          {errorMessage ? (<Alert message={errorMessage} type="error" showIcon />) : (<p></p>)}
-          {loading && <EclipseWidget />}
+            </Form>
 
+            <FacebookLogin
+              appId="702276423773435"
+              autoLoad={false}
+              fields="first_name,last_name,picture,email"
+              callback={responseFacebook} 
+              cssClass="my-btn"
+              />
 
-        </Form>
-
-        <FacebookLogin
-          appId="702276423773435"
-          autoLoad={false}
-          fields="first_name,last_name,picture,email"
-          callback={responseFacebook} />
-
-
+          </div>
+        </div>
+              {loading && <EclipseWidget />}
       </Fragment>
     );
 

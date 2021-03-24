@@ -1,26 +1,89 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom'
+import { Steps, Button, message } from 'antd';
+const { Step } = Steps;
+
 
 export class Home extends Component {
   static displayName = Home.name;
 
-  render () {
+  state = {
+    steps: [
+      {
+        title: 'Register in system',
+        content: 'Register in the system to see all the courses you can take ',
+      },
+      {
+        title: 'Find courses',
+        content: 'Find the courses you would like to take',
+      },
+      {
+        title: 'Study',
+        content: 'To study on the chosen course and not to stop on it and to develop further with other courses',
+      },
+    ],
+    current: 0
+  }
+
+
+  render() {
+
+    const { current, steps } = this.state;
+
+    const next = () => {
+      this.setState({
+        current: current + 1
+      })
+    };
+
+    const prev = () => {
+      this.setState({
+        current: current - 1
+      })
+    };
+
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
+      <Fragment>
+        <div class="jumbotron">
+          <h1 class="display-4 base-color">Honey Courses</h1>
+          <p class="lead">Find the course that interests you and start developing</p>
+          <hr class="my-4" />
+          <p class="lead">
+            <Link class="btn btn-primary btn-lg" to="/panel" role="button"> <i class="fas fa-search"></i> Find courses</Link>
+          </p>
+        </div>
+
+        <Steps current={current}>
+          {steps.map(item => (
+            <Step key={item.title} title={item.title} />
+          ))}
+        </Steps>
+
+        <div className="steps-content">{steps[current].content}</div>
+        <div className="steps-action">
+          {current < steps.length - 1 && (
+            <Button type="primary" onClick={() => next()}>
+              Next
+            </Button>
+          )}
+          {current === steps.length - 1 && (
+            <Button type="primary" onClick={() => message.success('Processing complete!')}>
+              Done
+            </Button>
+          )}
+          {current > 0 && (
+            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+              Previous
+            </Button>
+          )}
+        </div>
+
+
+      
+
+      </Fragment>
+
+
     );
   }
 }
