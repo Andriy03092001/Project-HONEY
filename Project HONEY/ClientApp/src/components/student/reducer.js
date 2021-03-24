@@ -69,8 +69,26 @@ export const panelStudentReducer = (state = intialState, action) => {
                 currentPage: action.payload
             }
 
+
+
+            case types.SUBCOURSESSTARTED:
+            return {
+                ...state,
+                loading: true,
+                errors: ""
+            }
+
+        case types.SUBCOURSESFAILED:
+            return {
+                ...state,
+                loading: false,
+                errors:  action.errors,
+            }
+
         case types.SUBCOURSESSUCCESS:
             return {
+                ...state,
+                loading: false,
                 successMessage: action.payload
             }
 

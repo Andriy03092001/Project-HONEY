@@ -1,6 +1,7 @@
 import * as types from './types';
 import PanelCoursesService from './service';
 import { push } from 'connected-react-router';
+import { message } from 'antd';
 
 export const getCourse = (page = 1, q = "") => {
     return (dispatch) => {
@@ -64,6 +65,8 @@ export const subOnCourse = (model) => {
                 console.log("Data server success:", response.data);
                 dispatch({ type: types.SUBCOURSESSUCCESS, payload: response.data });
                 dispatch(push('/'));
+                message.success('You have successfully signed up for the course!')//import { message } from 'antd';
+
             }, err => {
                 console.log("error: ", err.response);
                 dispatch({

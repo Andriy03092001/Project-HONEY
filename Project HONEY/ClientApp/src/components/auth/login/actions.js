@@ -12,7 +12,7 @@ export const loginUser = (model) => {
                 //console.log("Data server success:", response.data);
                 loginByJWT(response.data, dispatch);
                 dispatch({ type: types.LOGINSUCCESS });
-                dispatch(push('/'));
+                dispatch(push('/profile'));
 
             }, err => {
                 console.log("error: ", err.response);
@@ -35,7 +35,7 @@ export const loginFacebook = (model) => {
             .then((response) => {
                 loginByJWT(response.data, dispatch);
                 dispatch({ type: types.LOGINSUCCESS });
-                dispatch(push('/'));
+                dispatch(push('/profile'));
 
             }, err => {
                 console.log("error: ", err.response);
