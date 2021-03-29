@@ -47,9 +47,6 @@ class Panel extends Component {
         })
     };
 
-
-
-
     showModel = (id) => {
         var student = this.state.students.find(x => x.id === id);
         console.log(student)
@@ -77,18 +74,19 @@ class Panel extends Component {
 
 
         const onFinish = (values) => {
+            console.log("State on edit: ",this.state)
             const editedStudent = {
-                id: this.state.editStudent.id,
+                id: this.state.editStudent.key,
                 name: (values.name ? values.name : this.state.editStudent.name),
                 lastName: (values.lastName ? values.lastName : this.state.editStudent.lastName),
                 email: (values.email ? values.email : this.state.editStudent.email),
                 age: (values.age ? values.age : this.state.editStudent.age)
             }
             this.props.editStudent(editedStudent);
-            this.setState({
-                isEditModal: false
-            })
             this.props.getData(this.state.currentPage);
+
+            this.handleCancel();
+
         };
 
         const onFinishFailed = (errorInfo) => {
@@ -100,6 +98,10 @@ class Panel extends Component {
                 title: 'This student is enrolled in courses:',
                 dataIndex: 'title',
                
+            },
+            {
+                title: '',
+                dataIndex: 'startDate',
             }
         ]
            

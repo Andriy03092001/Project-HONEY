@@ -73,7 +73,7 @@ class Profile extends Component {
                                             cover={<img height="200px" alt="example" src={course.image} />}
                                         >
                                            <h4>{course.title}</h4>
-                                           <h4>{course.title}</h4>
+                                           <h4>{course.startDate}</h4>
 
                                         </Card>
                                     </div>

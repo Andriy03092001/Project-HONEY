@@ -53,7 +53,7 @@ export const panelReducer = (state = intialState, action) => {
                 return {
                     ...state,
                     loading: false,
-                    errors: "",
+                    errors: ""
                 }
     
             case types.EDITSTUDENTFAILED:

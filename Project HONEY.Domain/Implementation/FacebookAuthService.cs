@@ -23,7 +23,6 @@ namespace Project_HONEY.Domain.Implementation
             this.HttpClientFactory = HttpClientFactory;
         }
 
-
         public async Task<FacebookTokenValidationResult> ValidateAccessTokenAsync(string accessToken)
         {
             var formattedUrl = string.Format(TokenValidationUrl, accessToken, FacebookAuthSettings.AppId, FacebookAuthSettings.AppSecret);

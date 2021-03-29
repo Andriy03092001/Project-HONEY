@@ -55,7 +55,9 @@ namespace Project_HONEY.Domain.Implementation
                 {
                     Id = y.Id,
                     Image = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Image,
-                    Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title
+                    Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title,
+                    StartDate = Context.UserSubscriptions
+                    .FirstOrDefault(u=>u.UserId == id && u.CourseId == y.CourseId).StartDate.ToShortDateString()
                 }).ToList()
             };
             return profile;
@@ -78,7 +80,9 @@ namespace Project_HONEY.Domain.Implementation
                     Courses = Context.UserSubscriptions.Where(r=>r.UserId == t.Id).Select(y => new CourseDTO { 
                         Id = y.Id,
                         Image = Context.Course.FirstOrDefault(u=>u.Id == y.CourseId).Image,
-                        Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title
+                        Title = Context.Course.FirstOrDefault(u => u.Id == y.CourseId).Title,
+                        StartDate = Context.UserSubscriptions
+                    .FirstOrDefault(u => u.UserId == t.Id && u.CourseId == y.CourseId).StartDate.ToShortDateString()
                     }).ToList()
                 })
                 .ToList()

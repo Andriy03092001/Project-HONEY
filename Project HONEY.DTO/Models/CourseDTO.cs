@@ -9,5 +9,6 @@ namespace Project_HONEY.DTO.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
+        public string StartDate { get; set; }
     }
 }
